@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Impeccable runtime cache (PRODUCT.md and .impeccable/surfaces are meant to be committed)
+.impeccable/hook.cache.json
