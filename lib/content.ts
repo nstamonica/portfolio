@@ -1,16 +1,21 @@
 /**
  * All site copy lives here. Edit this file to update the portfolio:
- * every card on the page reads from it, so there is nothing else to touch.
+ * every panel on the page reads from it, so there is nothing else to touch.
  *
- * In `points`, wrap a phrase in **double asterisks** to give it a little
- * extra weight (used for the numbers).
+ * Two small formatting tricks work in most text below:
+ *   **double asterisks** give a phrase a little extra weight (used for numbers)
+ *   [link text](#experience) makes a link (to a panel, or to any https:// URL)
  */
+
+import halfMarathonPhoto from "@/assets/half-marathon.jpg";
 
 export type Theme = "crimson" | "teal" | "violet" | "blue" | "amber";
 export type Glyph = "shield" | "pulse" | "sparkle" | "code" | "database";
 
 export const site = {
   name: "Nathan Sta Monica",
+  /** The giant liquid word on the first screen. */
+  wordmark: "sta monica",
   title: "Nathan Sta Monica — Software Engineering & Cybersecurity",
   description:
     "Computer Science & Cybersecurity student at Carleton University. Previously at the RCMP, Shared Services Canada, Correctional Service Canada and the Canada Revenue Agency.",
@@ -23,28 +28,40 @@ export const site = {
   copyrightYear: 2026,
 };
 
-/** The big card with your name. */
-export const profile = {
-  headline: "Computer Science & Cybersecurity @ Carleton University",
-  previously:
-    "Previously @ RCMP, Shared Services Canada, Correctional Service Canada & Canada Revenue Agency",
+/** The first screen, above the wordmark. */
+export const intro = {
+  line: "I’m an undergraduate student passionate about software engineering, product management and building things that hold up.",
+  /** Used only by the link-preview image (app/opengraph-image.tsx); the first screen shows just the line. */
+  credentials:
+    "Computer Science & Cybersecurity at Carleton University. Previously at the RCMP, Shared Services Canada, Correctional Service Canada and the Canada Revenue Agency.",
 };
 
-export type FactIcon = "lifebuoy" | "basketball" | "medal" | "dumbbell" | "stopwatch" | "bowl";
+/** The casual one-line headings at the top of each panel. */
+export const headings = {
+  experience: "Where I’ve been working…",
+  projects: "What I’ve been building…",
+  tech: "Languages, frameworks and platforms I work with…",
+};
 
 export const about = {
-  greeting: "Hi! I’m Nathan, a Computer Science and Cybersecurity student at Carleton University.",
-  focus:
-    "I like working where security meets software: I’ve investigated phishing campaigns at the RCMP and built APIs, middleware and full-stack apps.",
-  interestsLead: "Outside of academics and my career, I like staying active.",
-  facts: [
-    { icon: "lifebuoy", tone: "crimson", text: "I’m a lifeguard" },
-    { icon: "basketball", tone: "amber", text: "I play basketball" },
-    { icon: "medal", tone: "blue", text: "3 half marathons and 1 marathon" },
-    { icon: "dumbbell", tone: "teal", text: "Training for HYROX" },
-    { icon: "stopwatch", tone: "violet", text: "Chasing a half‑marathon PR" },
-    { icon: "bowl", tone: "crimson", text: "Big foodie: shawarma and pho" },
-  ] satisfies { icon: FactIcon; tone: Theme; text: string }[],
+  paragraph:
+    "I’m Nathan, a Computer Science and Cybersecurity student at Carleton University. I like working where security, software and product meet: I’ve investigated phishing campaigns at [the RCMP](#exp-rcmp), built APIs, middleware and [full‑stack apps](#projects), and lately I’ve been diving into product management, figuring out what’s worth building and why. Away from the screen I’m a lifeguard, I play basketball, and I’ve run three half marathons (that’s one of them in the photo) and a full marathon. Right now I’m training for HYROX and chasing a half‑marathon PR. And I’m a big foodie: shawarma and pho are my go‑tos.",
+  /**
+   * The photo beside the paragraph. To swap it, replace the file in assets/
+   * (any size; a 3:4 portrait fits best) and update the import at the top.
+   */
+  photo: {
+    image: halfMarathonPhoto,
+    alt: "Nathan and a friend holding up their finisher’s medals after a half marathon",
+    caption: "21.1km, done.",
+    /** What the cursor chip says over the photo. */
+    cursor: "First ever half marathon!",
+  },
+};
+
+export const contact = {
+  heading: "Let’s build something secure.",
+  lede: "Open to co-op and internship opportunities in software engineering, product management and cybersecurity. Whether it’s a role, a project or a question, my inbox is open.",
 };
 
 export const education = {
@@ -61,6 +78,8 @@ export type Role = {
   role: string;
   period: string;
   theme: Theme;
+  /** One line shown before the role is opened. */
+  highlight: string;
   points: string[];
   tags: string[];
 };
@@ -72,6 +91,7 @@ export const experience: Role[] = [
     role: "Cybersecurity Analyst",
     period: "May 2026 – Aug 2026",
     theme: "crimson",
+    highlight: "Investigated phishing campaigns and automated vulnerability tracking, saving the team **10 hours a week**",
     points: [
       "Automated daily NVD vulnerability tracking with an Azure Logic App and PowerShell, saving the team **10 hours a week**",
       "Investigated coordinated phishing campaigns, detonating links and payloads in VirusTotal, urlscan.io and FortiSandbox and isolating compromised endpoints",
@@ -86,6 +106,7 @@ export const experience: Role[] = [
     role: "Network Operations Specialist",
     period: "May 2025 – May 2026",
     theme: "teal",
+    highlight: "Kept national public-safety services at **99.9% availability**",
     points: [
       "Sustained **99.9% availability** for national public-safety services with proactive telemetry monitoring and automated health audits",
       "Cut average Tier-2 incident resolution time by **18%**, clearing escalation backlogs into Tier-3 engineering",
@@ -100,6 +121,7 @@ export const experience: Role[] = [
     role: "Junior Web Developer",
     period: "Feb 2025 – May 2025",
     theme: "blue",
+    highlight: "Migrated **600+ courses** and **17,000+ user profiles** to D2L Brightspace",
     points: [
       "Built secure REST API endpoints across distributed microservices with response times **under 200ms**",
       "Rebuilt legacy interfaces with semantic HTML5, responsive CSS3 and vanilla JavaScript, passing UAT on the first try",
@@ -113,6 +135,7 @@ export const experience: Role[] = [
     role: "System Analyst Intern",
     period: "May 2024 – Dec 2024",
     theme: "amber",
+    highlight: "Cut synchronization errors by **27%** in cross-platform middleware",
     points: [
       "Cut synchronization errors by **27%** in cross-platform Java, JavaScript and SAP middleware",
       "Reduced query latency by refactoring SQL joins and adding Oracle Database indexes",
@@ -126,9 +149,9 @@ export type Project = {
   /** Used for the #project-<slug> link and the ⌘K menu. */
   slug: string;
   name: string;
-  /** Short line under the name, e.g. "Personal project". */
+  /** Short badge next to the name, e.g. "Personal project". */
   kind: string;
-  /** A few words for the Projects card in the bento. */
+  /** A few words, shown when the project is in the list. */
   tagline: string;
   period: string;
   summary: string;
@@ -140,16 +163,17 @@ export type Project = {
 };
 
 /**
- * Add a project by copying an entry below. It appears in the Projects
- * section, the count on the Projects card and the ⌘K menu automatically.
+ * Add a project by copying an entry below. Put your NEWEST project FIRST:
+ * the first one becomes the big card, and the rest are listed beside it.
+ * It also shows up in the ⌘K menu automatically.
  * Pick any theme ("crimson" | "teal" | "violet" | "blue" | "amber") and
- * glyph ("shield" | "pulse" | "sparkle" | "code" | "database") for its art.
+ * glyph ("shield" | "pulse" | "sparkle" | "code" | "database") for its icon.
  */
 export const projects: Project[] = [
   {
     slug: "ai-personal-trainer",
     name: "AI Personal Trainer",
-    kind: "Personal project · Full-stack & applied AI",
+    kind: "Personal project",
     tagline: "An AI coach that watches your form",
     period: "Dec 2025 – Apr 2026",
     summary:
@@ -167,47 +191,44 @@ export const projects: Project[] = [
   },
 ];
 
-export type Tech = { name: string; logo: string };
+/**
+ * The sliding logo tiles. `color` is the tile; the logo is drawn in white,
+ * or in near-black when `dark: true` (for light tiles). The order is split
+ * into three rows, so neighbours are mixed to keep similar colours apart.
+ * Logos live in public/tech (Devicon, MIT licence; Node.js from Simple Icons, CC0).
+ */
+export type Tech = { name: string; logo: string; color: string; dark?: boolean };
 
-/** Logos live in public/tech (Devicon, MIT licence). */
 export const techStack: Tech[] = [
-  { name: "Python", logo: "/tech/python.svg" },
-  { name: "Java", logo: "/tech/java.svg" },
-  { name: "JavaScript", logo: "/tech/javascript.svg" },
-  { name: "TypeScript", logo: "/tech/typescript.svg" },
-  { name: "C / C++", logo: "/tech/cplusplus.svg" },
-  { name: "PowerShell", logo: "/tech/powershell.svg" },
-  { name: "PHP", logo: "/tech/php.svg" },
-  { name: "HTML5", logo: "/tech/html5.svg" },
-  { name: "CSS3", logo: "/tech/css3.svg" },
-  { name: "React", logo: "/tech/react.svg" },
-  { name: "Next.js", logo: "/tech/nextjs.svg" },
-  { name: "Node.js", logo: "/tech/nodejs.svg" },
-  { name: "Express", logo: "/tech/express.svg" },
-  { name: "Flask", logo: "/tech/flask.svg" },
-  { name: "FastAPI", logo: "/tech/fastapi.svg" },
-  { name: "Tailwind CSS", logo: "/tech/tailwindcss.svg" },
-  { name: "Bootstrap", logo: "/tech/bootstrap.svg" },
-  { name: "NumPy", logo: "/tech/numpy.svg" },
-  { name: "Microsoft Azure", logo: "/tech/azure.svg" },
-  { name: "Docker", logo: "/tech/docker.svg" },
-  { name: "Podman", logo: "/tech/podman.svg" },
-  { name: "Linux", logo: "/tech/linux.svg" },
-  { name: "Windows Server", logo: "/tech/windows.svg" },
-  { name: "MariaDB", logo: "/tech/mariadb.svg" },
-  { name: "SQLite", logo: "/tech/sqlite.svg" },
-  { name: "Git", logo: "/tech/git.svg" },
-  { name: "GitHub", logo: "/tech/github.svg" },
-  { name: "VS Code", logo: "/tech/vscode.svg" },
-];
-
-/** Shown as chips under the logos. */
-export const securityTools = [
-  "Microsoft Sentinel",
-  "Microsoft Defender",
-  "FortiSIEM",
-  "FortiSandbox",
-  "VirusTotal",
-  "urlscan.io",
-  "CVSS",
+  // Row 1
+  { name: "Python", logo: "/tech/python.svg", color: "#3776ab" },
+  { name: "HTML5", logo: "/tech/html5.svg", color: "#e34f26" },
+  { name: "TypeScript", logo: "/tech/typescript.svg", color: "#3178c6" },
+  { name: "JavaScript", logo: "/tech/javascript.svg", color: "#f7df1e", dark: true },
+  { name: "Docker", logo: "/tech/docker.svg", color: "#2496ed" },
+  { name: "Podman", logo: "/tech/podman.svg", color: "#892ca0" },
+  { name: "React", logo: "/tech/react.svg", color: "#61dafb", dark: true },
+  { name: "Node.js", logo: "/tech/nodejs.svg", color: "#5fa04e" },
+  { name: "Microsoft Azure", logo: "/tech/azure.svg", color: "#0078d4" },
+  { name: "Express", logo: "/tech/express.svg", color: "#ffffff", dark: true },
+  // Row 2
+  { name: "Java", logo: "/tech/java.svg", color: "#e76f00" },
+  { name: "CSS3", logo: "/tech/css3.svg", color: "#1572b6" },
+  { name: "Next.js", logo: "/tech/nextjs.svg", color: "#111110" },
+  { name: "Linux", logo: "/tech/linux.svg", color: "#fcc624", dark: true },
+  { name: "Tailwind CSS", logo: "/tech/tailwindcss.svg", color: "#06b6d4" },
+  { name: "PHP", logo: "/tech/php.svg", color: "#777bb4" },
+  { name: "VS Code", logo: "/tech/vscode.svg", color: "#007acc" },
+  { name: "FastAPI", logo: "/tech/fastapi.svg", color: "#009688" },
+  { name: "Windows Server", logo: "/tech/windows.svg", color: "#00a4ef" },
+  // Row 3
+  { name: "C / C++", logo: "/tech/cplusplus.svg", color: "#00599c" },
+  { name: "Git", logo: "/tech/git.svg", color: "#f05032" },
+  { name: "NumPy", logo: "/tech/numpy.svg", color: "#4d77cf" },
+  { name: "GitHub", logo: "/tech/github.svg", color: "#181717" },
+  { name: "PowerShell", logo: "/tech/powershell.svg", color: "#2c5591" },
+  { name: "Bootstrap", logo: "/tech/bootstrap.svg", color: "#7952b3" },
+  { name: "SQLite", logo: "/tech/sqlite.svg", color: "#0f80cc" },
+  { name: "Flask", logo: "/tech/flask.svg", color: "#3babc3" },
+  { name: "MariaDB", logo: "/tech/mariadb.svg", color: "#003545" },
 ];

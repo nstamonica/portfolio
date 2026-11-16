@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "dm serif display",
+        "createdAt": "2026-11-15T19:19:08.870Z",
+        "reason": "user confirmed: Nathan chose the same serif as Brandon's (DM Serif Display) for the redesign on 2026-11-15; DESIGN.md is rewritten from the new build at finish"
+      }
+    ]
+  }
+}

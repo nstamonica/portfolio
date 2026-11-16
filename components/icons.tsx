@@ -21,15 +21,15 @@ function Stroke({ children, ...props }: IconProps) {
   );
 }
 
-export const ArrowRight = (p: IconProps) => (
-  <Stroke {...p}>
-    <path d="M4.5 12h15M13.5 6l6 6-6 6" />
-  </Stroke>
-);
-
 export const ArrowUpRight = (p: IconProps) => (
   <Stroke {...p}>
     <path d="M7 17 17 7M8.5 7H17v8.5" />
+  </Stroke>
+);
+
+export const ChevronDown = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="m6 9.5 6 6 6-6" />
   </Stroke>
 );
 
@@ -80,13 +80,6 @@ export const Briefcase = (p: IconProps) => (
   </Stroke>
 );
 
-export const GraduationCap = (p: IconProps) => (
-  <Stroke {...p}>
-    <path d="M12 4.5 2.5 9.25 12 14l9.5-4.75z" />
-    <path d="M6.5 11.25v4.25c0 1.4 2.5 3 5.5 3s5.5-1.6 5.5-3v-4.25M21.5 9.25V14" />
-  </Stroke>
-);
-
 /* ---------- Project art glyphs ---------- */
 
 export const Shield = (p: IconProps) => (
@@ -123,52 +116,6 @@ export const Database = (p: IconProps) => (
   </Stroke>
 );
 
-/* ---------- About-me glyphs ---------- */
-
-export const Lifebuoy = (p: IconProps) => (
-  <Stroke {...p}>
-    <circle cx="12" cy="12" r="8.25" />
-    <circle cx="12" cy="12" r="3.75" />
-    <path d="m6.17 6.17 3.18 3.18M14.65 14.65l3.18 3.18M17.83 6.17l-3.18 3.18M9.35 14.65l-3.18 3.18" />
-  </Stroke>
-);
-
-export const Basketball = (p: IconProps) => (
-  <Stroke {...p}>
-    <circle cx="12" cy="12" r="8.25" />
-    <path d="M3.75 12h16.5M12 3.75v16.5" />
-    <path d="M6.2 6.2c1.6 1.55 2.55 3.6 2.55 5.8s-.95 4.25-2.55 5.8M17.8 6.2c-1.6 1.55-2.55 3.6-2.55 5.8s.95 4.25 2.55 5.8" />
-  </Stroke>
-);
-
-export const Medal = (p: IconProps) => (
-  <Stroke {...p}>
-    <path d="M8.25 3.5 11 10M15.75 3.5 13 10" />
-    <circle cx="12" cy="15" r="5" />
-    <circle cx="12" cy="15" r="1.75" />
-  </Stroke>
-);
-
-export const Dumbbell = (p: IconProps) => (
-  <Stroke {...p}>
-    <path d="M7 7v10M17 7v10M4 9.75v4.5M20 9.75v4.5M7 12h10" />
-  </Stroke>
-);
-
-export const Stopwatch = (p: IconProps) => (
-  <Stroke {...p}>
-    <circle cx="12" cy="13.5" r="7" />
-    <path d="M12 13.5V10M10 3.5h4M12 3.5v3M18.25 7.25 19.5 6" />
-  </Stroke>
-);
-
-export const Bowl = (p: IconProps) => (
-  <Stroke {...p}>
-    <path d="M3.5 11.5h17a8.5 7 0 0 1-17 0z" />
-    <path d="M8.5 8.5c0-1.1.9-1.6.9-2.75M12 8.5c0-1.1.9-1.6.9-2.75M15.5 8.5c0-1.1.9-1.6.9-2.75" />
-  </Stroke>
-);
-
 /* ---------- Brand marks (filled) ---------- */
 
 export const GitHub = (p: IconProps) => (
@@ -189,13 +136,4 @@ export const glyphs = {
   sparkle: Sparkle,
   code: Code,
   database: Database,
-} as const;
-
-export const factIcons = {
-  lifebuoy: Lifebuoy,
-  basketball: Basketball,
-  medal: Medal,
-  dumbbell: Dumbbell,
-  stopwatch: Stopwatch,
-  bowl: Bowl,
 } as const;

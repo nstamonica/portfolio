@@ -1,14 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { DECK_VISIBILITY_EVENT } from "@/lib/deck";
 import { cx } from "@/lib/cx";
 
 /*
- * A live "liquid" background rendered with a WebGL2 fragment shader:
- * iterated sinusoidal domain warping with iridescent rims, plus a soft lens
- * that follows the pointer. It pauses off-screen, adapts its resolution to the
- * GPU, renders a single still frame for reduced-motion users, and falls back to
- * a CSS gradient when WebGL2 is unavailable.
+ * The living liquid inside the "sta monica" wordmark, rendered with a WebGL2
+ * fragment shader: iterated sinusoidal domain warping with iridescent rims,
+ * plus a soft lens that follows the pointer.
+ *
+ * The canvas sits over the ink wordmark with `mix-blend-mode: lighten`. Every
+ * colour it draws is darker than the paper, so over paper the paper wins and
+ * over the black letters the liquid shows: the letters fill with liquid while
+ * the real text stays underneath (selectable, readable, and what you see if
+ * WebGL is unavailable).
+ *
+ * It pauses when its panel is off screen, adapts its resolution to the GPU and
+ * renders a single still frame for reduced-motion users.
  */
 
 const VERTEX_SHADER = /* glsl */ `#version 300 es
@@ -32,12 +40,12 @@ void main() {
   vec2 mp = (uPointer - 0.5 * uRes) / uRes.y;
   // soft lens that follows the pointer
   vec2 d = p - mp;
-  p -= d * 0.16 * exp(-dot(d, d) * 7.0);
+  p -= d * 0.22 * exp(-dot(d, d) * 9.0);
 
-  float t = uTime * 0.11 + uSeed;
+  float t = uTime * 0.12 + uSeed;
 
   // Liquid: iterated sinusoidal domain warping gives long, smooth folds.
-  vec2 uv = p * 2.6 + vec2(uSeed * 0.37, -uSeed * 0.21);
+  vec2 uv = p * 2.5 + vec2(uSeed * 0.37, -uSeed * 0.21);
   for (int i = 1; i < 8; i++) {
     float fi = float(i);
     uv.x += 0.7 / pow(fi, 1.3) * sin(fi * 1.55 * uv.y + t + 0.9 * fi);
@@ -47,20 +55,20 @@ void main() {
   float s1 = sin(uv.x * 1.5 + uv.y * 0.75);
   float s2 = sin(uv.x * 0.55 - uv.y * 1.3 + 1.3);
 
-  vec3 abyss  = vec3(0.004, 0.006, 0.030);
-  vec3 navy   = vec3(0.015, 0.040, 0.190);
-  vec3 cobalt = vec3(0.060, 0.290, 1.000);
-  vec3 violet = vec3(0.420, 0.160, 0.880);
-  vec3 sky    = vec3(0.620, 0.880, 1.000);
-  vec3 orchid = vec3(0.980, 0.540, 0.930);
-  vec3 peach  = vec3(1.000, 0.720, 0.680);
+  vec3 abyss  = vec3(0.012, 0.016, 0.060);
+  vec3 navy   = vec3(0.030, 0.060, 0.240);
+  vec3 cobalt = vec3(0.070, 0.300, 1.000);
+  vec3 violet = vec3(0.440, 0.170, 0.900);
+  vec3 sky    = vec3(0.560, 0.820, 1.000);
+  vec3 orchid = vec3(0.960, 0.500, 0.900);
+  vec3 peach  = vec3(1.000, 0.680, 0.620);
 
   float lum = smoothstep(-0.55, 0.9, s1);
   vec3 col = mix(abyss, navy, smoothstep(0.0, 0.3, lum));
   col = mix(col, cobalt, smoothstep(0.3, 1.0, lum));
-  col = mix(col, violet, smoothstep(0.35, 1.0, s2) * 0.4 * (1.0 - 0.6 * lum));
-  col = mix(col, orchid, smoothstep(0.75, 1.0, s2) * smoothstep(0.2, 0.7, lum) * 0.22);
-  col *= mix(0.22, 1.0, smoothstep(-1.3, -0.25, s1 + s2 * 0.7));
+  col = mix(col, violet, smoothstep(0.35, 1.0, s2) * 0.45 * (1.0 - 0.6 * lum));
+  col = mix(col, orchid, smoothstep(0.75, 1.0, s2) * smoothstep(0.2, 0.7, lum) * 0.24);
+  col *= mix(0.3, 1.0, smoothstep(-1.3, -0.25, s1 + s2 * 0.7));
 
   // iridescent rims along the fold edges
   float phase = s1 * 5.0 + s2 * 1.6;
@@ -70,15 +78,14 @@ void main() {
   vec3 iri = mix(sky, orchid, smoothstep(-0.6, 0.9, sin(s2 * 2.6 + uv.x * 0.7)));
   iri = mix(iri, peach, smoothstep(0.65, 1.0, s2) * 0.55);
   float rimMask = smoothstep(-0.5, 0.5, s1);
-  col += rim * iri * 0.85 * rimMask;
+  col += rim * iri * 0.7 * rimMask;
   col += halo * iri * 0.07 * rimMask;
-
-  float vignette = smoothstep(1.35, 0.2, length(p * vec2(0.8, 1.1)));
-  col *= mix(0.5, 1.0, vignette);
 
   col = 1.0 - exp(-col * 1.6);
   // dither to avoid banding in the dark gradients
   col += (fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453) - 0.5) / 255.0;
+  // Never lighter than the paper (#eeeee0), or it would show around the letters.
+  col = min(col, vec3(0.86, 0.86, 0.82));
   outColor = vec4(col, 1.0);
 }
 `;
@@ -147,7 +154,7 @@ export function LiquidCanvas({ className, seed = 0 }: LiquidCanvasProps) {
     const buffer = gl.createBuffer();
     gl.bindVertexArray(vao);
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    // One oversized triangle covers the whole viewport.
+    // One oversized triangle covers the whole canvas.
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     gl.enableVertexAttribArray(0);
     gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
@@ -162,9 +169,7 @@ export function LiquidCanvas({ className, seed = 0 }: LiquidCanvasProps) {
     // Render below native resolution: the image is soft, so this is invisible
     // but saves a lot of GPU time. Lowered further if frames run long.
     let quality = Math.min(window.devicePixelRatio || 1, 2) * 0.75;
-    // As a full-screen wallpaper the canvas can get very large (4K, high-DPI),
-    // so cap the pixels shaded per frame as well.
-    const MAX_PIXELS = 1_500_000;
+    const MAX_PIXELS = 1_000_000;
     let width = 0;
     let height = 0;
 
@@ -208,12 +213,12 @@ export function LiquidCanvas({ className, seed = 0 }: LiquidCanvasProps) {
         tx = (pointer.x - rect.left) / Math.max(rect.width, 1);
         ty = (pointer.y - rect.top) / Math.max(rect.height, 1);
       } else {
-        // idle / touch: let the lens drift on its own
-        tx = 0.5 + Math.cos(elapsed * 0.21) * 0.22;
-        ty = 0.5 + Math.sin(elapsed * 0.17) * 0.18;
+        // idle / touch: let the lens drift along the word on its own
+        tx = 0.5 + Math.cos(elapsed * 0.21) * 0.32;
+        ty = 0.55 + Math.sin(elapsed * 0.17) * 0.2;
       }
-      lens.x += (tx - lens.x) * 0.045;
-      lens.y += (ty - lens.y) * 0.045;
+      lens.x += (tx - lens.x) * 0.05;
+      lens.y += (ty - lens.y) * 0.05;
 
       gl.uniform2f(uRes, width, height);
       gl.uniform1f(uTime, elapsed);
@@ -258,13 +263,23 @@ export function LiquidCanvas({ className, seed = 0 }: LiquidCanvasProps) {
       raf = 0;
     };
 
+    // Off screen in the normal page, or covered by a later panel in the deck.
     let inView = true;
-    const sync = () => (inView && !document.hidden ? start() : stop());
+    let panelVisible = true;
+    const panelId = canvas.closest(".panel")?.id;
+    const sync = () => (inView && panelVisible && !document.hidden ? start() : stop());
     const io = new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting;
       sync();
     });
     io.observe(canvas);
+
+    const onDeckVisibility = (event: Event) => {
+      const { id, visible } = (event as CustomEvent<{ id: string; visible: boolean }>).detail;
+      if (id !== panelId) return;
+      panelVisible = visible;
+      sync();
+    };
 
     const ro = new ResizeObserver(() => {
       resize();
@@ -279,6 +294,7 @@ export function LiquidCanvas({ className, seed = 0 }: LiquidCanvasProps) {
     };
 
     document.addEventListener("visibilitychange", sync);
+    window.addEventListener(DECK_VISIBILITY_EVENT, onDeckVisibility);
     canvas.addEventListener("webglcontextlost", onContextLost);
     window.addEventListener("pointermove", onPointerMove, { passive: true });
 
@@ -292,6 +308,7 @@ export function LiquidCanvas({ className, seed = 0 }: LiquidCanvasProps) {
       io.disconnect();
       ro.disconnect();
       document.removeEventListener("visibilitychange", sync);
+      window.removeEventListener(DECK_VISIBILITY_EVENT, onDeckVisibility);
       canvas.removeEventListener("webglcontextlost", onContextLost);
       window.removeEventListener("pointermove", onPointerMove);
       gl.deleteBuffer(buffer);
@@ -302,11 +319,10 @@ export function LiquidCanvas({ className, seed = 0 }: LiquidCanvasProps) {
 
   return (
     <div className={className} aria-hidden="true">
-      <div className="liquid-fallback absolute inset-0" />
       <canvas
         ref={canvasRef}
         className={cx(
-          "absolute inset-0 h-full w-full transition-opacity duration-[1600ms] ease-out",
+          "absolute inset-0 h-full w-full transition-opacity duration-[1400ms] ease-out",
           ready ? "opacity-100" : "opacity-0",
         )}
       />

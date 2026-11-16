@@ -1,13 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { DM_Serif_Display, Inter } from "next/font/google";
 import { CommandPalette } from "@/components/command-palette";
-import { LiquidCanvas } from "@/components/liquid-canvas";
+import { CursorChip } from "@/components/cursor-chip";
 import { site } from "@/lib/content";
+import { DECK_QUERY } from "@/lib/deck";
 import "./globals.css";
 
+// The fixed weights the site uses (medium text, semibold names, bold numbers).
+// Fixed cuts, as on brandondavid.dev, render a touch darker and crisper on
+// Windows than the variable font does at the same weight.
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+// The wordmark and the closing line.
+const serif = DM_Serif_Display({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-dm-serif",
   display: "swap",
 });
 
@@ -51,25 +64,28 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: "light",
-  // Matches the liquid's darkest tone so mobile browser chrome blends in.
-  themeColor: "#04050d",
+  // The paper, so mobile browser chrome blends in.
+  themeColor: "#eeeee0",
 };
+
+// Runs before the first paint: on laptops and desktops the page opens as the
+// panel deck straight away instead of flashing as a long scroll first. If the
+// deck never starts (scripts blocked or failed), normal scrolling comes back.
+const deckBootstrap = `(function(){try{if(matchMedia(${JSON.stringify(DECK_QUERY)}).matches){var d=document.documentElement;d.classList.add("deck-on");setTimeout(function(){if(!window.__deckReady)d.classList.remove("deck-on")},6000)}}catch(e){}})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-CA" data-scroll-behavior="smooth" className={inter.variable}>
-      <body className="flex min-h-svh flex-col">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-4 focus:z-[200] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-[14px] focus:shadow-lg"
-        >
-          Skip to content
-        </a>
-        {/* The living wallpaper behind every page. */}
-        <LiquidCanvas className="pointer-events-none fixed inset-0 -z-10" />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
+    <html
+      lang="en-CA"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${serif.variable}`}
+      // The bootstrap script adds a class to <html> before React hydrates.
+      suppressHydrationWarning
+    >
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: deckBootstrap }} />
+        <main id="main">{children}</main>
+        <CursorChip />
         <CommandPalette />
       </body>
     </html>

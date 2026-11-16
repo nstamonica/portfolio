@@ -2,18 +2,19 @@
 
 Personal portfolio of Nathan Sta Monica, a Computer Science & Cybersecurity student at Carleton University, previously at the RCMP, Shared Services Canada, Correctional Service Canada and the Canada Revenue Agency.
 
-An Apple-inspired, one-page, fully static site built with **Next.js 16**, **React 19**, **TypeScript** and **Tailwind CSS 4**.
+A one-page, fully static site built with **Next.js 16**, **React 19**, **TypeScript** and **Tailwind CSS 4**. The look is warm paper and black ink, with a giant serif "sta monica" whose letters are filled with a live WebGL liquid.
 
 ## Highlights
 
-- **One page, one screen.** On a desktop the bento (name, About me, Experience, Tech, Projects, Education) fits on a single screen, with a compact layout for shorter laptop windows. On tablets and phones it reflows into a single scroll.
-- **Live WebGL wallpaper.** A hand-written GLSL fragment shader (iterated domain warping with iridescent rims) sits behind the whole page and drifts toward the pointer. It caps its resolution, lowers it further on slow GPUs, pauses when the tab is hidden, renders one still frame for `prefers-reduced-motion`, and falls back to a CSS gradient without WebGL2.
-- **Experience timeline.** Four roles, colour-coded, scrolling inside their card on desktop.
-- **Projects that grow.** Add an entry to `projects` in `lib/content.ts`. It appears in the Projects section, the project count and the ⌘K menu.
-- **⌘K command menu.** Spotlight-style search across sections, roles, projects and links, with full keyboard support and ARIA combobox semantics.
-- **Fully static.** `ensureStatic = "navigation"` in the root layout fails the build if any route would need request-time rendering.
-- **Hardened headers.** Content-Security-Policy, HSTS, `X-Frame-Options`, `X-Content-Type-Options`, Referrer-Policy, Permissions-Policy and COOP; `X-Powered-By` removed.
-- **Accessible.** WCAG AA text contrast, a skip link, visible focus states, reduced-motion support, and content that stays readable without JavaScript.
+- **Page deck.** On laptops and desktops the page is six full-screen panels: Intro, Experience, Projects, Tech, About, Contact. The scroll wheel, arrow keys, Page Up/Down, Space or a swipe move one panel at a time on a spring, and each panel sharpens from a blur as it arrives. Phones and tablets get the same panels as a normal scroll.
+- **Liquid wordmark.** A hand-written GLSL shader (iterated domain warping with iridescent rims) fills the letters of "sta monica" and leans toward the pointer. The real text stays underneath (the canvas blends over it), so it falls back to ink letters without WebGL. The shader pauses when off screen and renders a single still frame for `prefers-reduced-motion`.
+- **Experience.** All four roles on one panel. Each shows its headline result and opens (native `<details>`) to every point and tool.
+- **Projects that grow.** The newest project is the big card; add more and they're listed beside it. Each also appears in the ⌘K menu.
+- **Sliding tech tiles.** Three rows of app-icon tiles in brand colours.
+- **Cursor chip.** A small "sta monica" label trails the mouse and names the tile or project under it.
+- **⌘K command menu.** Jump to any panel, role or project, copy the email address, or open links.
+- **Fully static and hardened.** `ensureStatic = "navigation"` fails the build if a route would need request-time rendering. Content-Security-Policy, HSTS, `X-Frame-Options`, `X-Content-Type-Options`, Referrer-Policy, Permissions-Policy and COOP are set, and `X-Powered-By` is removed.
+- **Accessible.** WCAG AA text contrast, full keyboard support (focus follows the deck), reduced-motion support, and a complete page without JavaScript.
 
 ## Getting started
 
@@ -29,30 +30,36 @@ npm run lint
 
 ## Editing content
 
-All copy lives in [`lib/content.ts`](lib/content.ts).
+All copy lives in [`lib/content.ts`](lib/content.ts). In most text, `**double asterisks**` make a phrase a little heavier and `[text](#experience)` makes a link.
 
-- **Add a project:** copy the entry in `projects` and change it. Pick a `theme` and `glyph` for its cover art, and add `links` (e.g. a GitHub repo or live demo) to show buttons.
-- **Edit experience:** each role has `points` and `tags`. Wrap a phrase in `**double asterisks**` to give it a little extra weight.
-- **About me:** `about.facts` are the icon rows. Each has an `icon` (`lifebuoy`, `basketball`, `medal`, `dumbbell`, `stopwatch`, `bowl`) and a colour `tone`.
-- **Tech logos:** `techStack` points at SVGs in `public/tech`.
-- **Update the résumé:** replace `public/resume.pdf`.
+- **Add a project:** copy the entry in `projects` and put the newest one first (it becomes the big card). Pick a `theme` and `glyph`, and add `links` (e.g. a GitHub repo) to show buttons.
+- **Edit experience:** each role has a one-line `highlight`, its `points` and `tags`.
+- **Intro, About, Contact:** `intro`, `about.paragraph` and `contact`. The panel headings are in `headings`.
+- **Tech tiles:** `techStack`: each has a logo in `public/tech` and a tile `color` (`dark: true` for light tiles).
+- **Update the resume:** replace `public/resume.pdf`.
+- **Change the wordmark:** `site.wordmark`. Then re-measure `--wordmark-em` (and `--wordmark-word-em` for phones) in `app/globals.css`, so it still fills the width.
 
 ## Project structure
 
 ```
 app/
-  layout.tsx              root layout, metadata, liquid background, command menu
-  page.tsx                the one page: bento, projects, contact
+  layout.tsx              root layout, fonts, metadata, cursor chip, command menu
+  page.tsx                the six panels inside the deck
   not-found.tsx           404
-  opengraph-image.tsx     social preview image
+  opengraph-image.tsx     social preview image (built at build time)
   icon.svg                favicon
 components/
-  cards/                  identity, about, experience, tech, projects, education
-  sections/               projects list and contact close
-  liquid-canvas.tsx       WebGL2 background
+  panels/                 intro, experience, projects, tech, about, contact
+  deck.tsx                full-screen panel deck (desktop) and scroll reveals (mobile)
+  liquid-canvas.tsx       WebGL2 liquid inside the wordmark
+  cursor-chip.tsx         the label that trails the mouse
   command-palette.tsx     ⌘K menu
 lib/
   content.ts              all site copy
+  deck.ts                 lets the ⌘K menu move the deck
+assets/
+  fonts/                  fonts for the preview image (SIL Open Font License)
+  og-liquid.png           a rendered still of the liquid, for the preview image
 public/
   tech/                   technology logos
   resume.pdf
@@ -60,10 +67,12 @@ public/
 
 ## Deployment
 
-The simplest path is [Vercel](https://vercel.com/new): import the repository and keep the defaults. The headers defined in `next.config.ts` are applied automatically.
+Deployed on [Vercel](https://vercel.com): every push to `main` redeploys, and other branches get preview URLs. The headers defined in `next.config.ts` are applied automatically.
 
 Any Node.js host also works with `npm run build && npm run start`. Outside Vercel, set `NEXT_PUBLIC_SITE_URL` to the site's public URL so social previews resolve.
 
 ## Credits
 
-Technology logos from [Devicon](https://devicon.dev) (MIT licence). They are trademarks of their respective owners.
+- Technology logos from [Devicon](https://devicon.dev) (MIT licence) and, for Node.js, [Simple Icons](https://simpleicons.org) (CC0). They are trademarks of their respective owners.
+- Fonts: DM Serif Display and Inter (SIL Open Font License).
+- Design reference: [brandondavid.dev](https://brandondavid.dev).

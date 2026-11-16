@@ -1,882 +1,624 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-14T03:22:24.443Z",
+  "generatedAt": "2026-11-16T06:32:08.061Z",
   "title": "Design System: Nathan Sta Monica",
   "extensions": {
     "colorMeta": {
-      "apple-blue": {
-        "role": "primary",
-        "displayName": "Apple Blue",
-        "canonical": "#0071e3",
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "oklch(94.5% 0.019 106.7)",
         "tonalRamp": [
-          "#002c59",
-          "#0050a1",
-          "#0066cc",
-          "#0071e3",
-          "#358fe9",
-          "#67aaee",
-          "#c5dff9",
-          "#eaf4fd"
+          "#0c0b07",
+          "#26261d",
+          "#434338",
+          "#626256",
+          "#838377",
+          "#a6a69a",
+          "#cacac2",
+          "#efefec"
         ]
       },
-      "apple-blue-hover": {
-        "role": "primary",
-        "displayName": "Apple Blue Bright",
-        "canonical": "#0077ed",
+      "paper-2": {
+        "role": "neutral",
+        "displayName": "Pressed Paper",
+        "canonical": "oklch(91.4% 0.023 106.8)",
         "tonalRamp": [
-          "#002c59",
-          "#0050a1",
-          "#0066cc",
-          "#0071e3",
-          "#358fe9",
-          "#67aaee",
-          "#c5dff9",
-          "#eaf4fd"
-        ]
-      },
-      "link-blue": {
-        "role": "primary",
-        "displayName": "Link Blue",
-        "canonical": "#0066cc",
-        "tonalRamp": [
-          "#002c59",
-          "#0050a1",
-          "#0066cc",
-          "#0071e3",
-          "#358fe9",
-          "#67aaee",
-          "#c5dff9",
-          "#eaf4fd"
+          "#0c0c06",
+          "#26261b",
+          "#434335",
+          "#626254",
+          "#848374",
+          "#a6a698",
+          "#cacac0",
+          "#efefeb"
         ]
       },
       "ink": {
-        "role": "neutral",
-        "displayName": "Ink",
-        "canonical": "#1d1d1f",
+        "role": "primary",
+        "displayName": "Black Ink",
+        "canonical": "oklch(17.7% 0.002 106.6)",
         "tonalRamp": [
-          "#0e0e0f",
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7",
-          "#f5f5f7"
+          "#0b0b0b",
+          "#252524",
+          "#424241",
+          "#616160",
+          "#828281",
+          "#a5a5a4",
+          "#c9c9c8",
+          "#eeeeee"
         ]
       },
-      "ink-hover": {
-        "role": "neutral",
-        "displayName": "Ink Hover",
-        "canonical": "#333336",
+      "ink-2": {
+        "role": "primary",
+        "displayName": "Deep Ink",
+        "canonical": "oklch(29.6% 0.007 106.8)",
         "tonalRamp": [
-          "#0e0e0f",
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7",
-          "#f5f5f7"
-        ]
-      },
-      "liquid-fallback-cobalt": {
-        "role": "neutral",
-        "displayName": "Liquid Fallback Cobalt",
-        "canonical": "rgb(37 99 235 / 0.9)",
-        "tonalRamp": [
-          "#0b1e47",
-          "#12307a",
-          "#1a45ad",
-          "#2563eb",
-          "#5585f0",
-          "#86a8f5",
-          "#b6cafa",
-          "#e6edfd"
-        ]
-      },
-      "liquid-fallback-violet": {
-        "role": "neutral",
-        "displayName": "Liquid Fallback Violet",
-        "canonical": "rgb(124 58 237 / 0.85)",
-        "tonalRamp": [
-          "#25114a",
-          "#3d1d7c",
-          "#5a2aaf",
-          "#7c3aed",
-          "#9a66f1",
-          "#b892f5",
-          "#d6bffa",
-          "#f1eafd"
-        ]
-      },
-      "liquid-fallback-magenta": {
-        "role": "neutral",
-        "displayName": "Liquid Fallback Magenta",
-        "canonical": "rgb(219 39 119 / 0.55)",
-        "tonalRamp": [
-          "#430c25",
-          "#701440",
-          "#a01c5c",
-          "#db2777",
-          "#e45a96",
-          "#ec8db5",
-          "#f4bfd5",
-          "#fbebf2"
-        ]
-      },
-      "liquid-fallback-sky": {
-        "role": "neutral",
-        "displayName": "Liquid Fallback Sky",
-        "canonical": "rgb(56 189 248 / 0.35)",
-        "tonalRamp": [
-          "#0c3a4d",
-          "#125b7a",
-          "#1a85b5",
-          "#38bdf8",
-          "#6acef9",
-          "#9bdefb",
-          "#c8edfd",
-          "#ebf8fe"
-        ]
-      },
-      "ink-secondary": {
-        "role": "neutral",
-        "displayName": "Ink Secondary",
-        "canonical": "#424245",
-        "tonalRamp": [
-          "#0e0e0f",
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7",
-          "#f5f5f7"
+          "#0b0b09",
+          "#252522",
+          "#42423e",
+          "#61615d",
+          "#83837e",
+          "#a5a5a1",
+          "#c9c9c6",
+          "#eeeeed"
         ]
       },
       "muted": {
         "role": "neutral",
-        "displayName": "Muted",
-        "canonical": "#5e5e63",
+        "displayName": "Graphite",
+        "canonical": "oklch(46.9% 0.013 106.9)",
         "tonalRamp": [
-          "#0e0e0f",
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7",
-          "#f5f5f7"
-        ]
-      },
-      "subtle": {
-        "role": "neutral",
-        "displayName": "Subtle",
-        "canonical": "#6e6e73",
-        "tonalRamp": [
-          "#0e0e0f",
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7",
-          "#f5f5f7"
+          "#0b0b08",
+          "#25251f",
+          "#43433b",
+          "#62625a",
+          "#83837a",
+          "#a6a69e",
+          "#c9c9c4",
+          "#eeeeed"
         ]
       },
       "line": {
         "role": "neutral",
-        "displayName": "Line",
-        "canonical": "#d2d2d7",
-        "tonalRamp": [
-          "#0e0e0f",
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7",
-          "#f5f5f7"
-        ]
-      },
-      "hairline": {
-        "role": "neutral",
         "displayName": "Hairline",
-        "canonical": "rgb(0 0 0 / 0.08)",
+        "canonical": "rgb(17 17 16 / 0.13)"
+      },
+      "night": {
+        "role": "secondary",
+        "displayName": "Liquid Abyss Navy",
+        "canonical": "oklch(16.9% 0.032 -86.0)",
         "tonalRamp": [
-          "#0e0e0f",
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7",
-          "#f5f5f7"
+          "#090b13",
+          "#212432",
+          "#3c4153",
+          "#5b6074",
+          "#7c8196",
+          "#9fa4b7",
+          "#c5c9d6",
+          "#edeef3"
         ]
       },
-      "mist": {
+      "on-night": {
+        "role": "secondary",
+        "displayName": "On Night",
+        "canonical": "rgb(255 255 255 / 0.9)"
+      },
+      "on-night-2": {
+        "role": "secondary",
+        "displayName": "On Night, secondary",
+        "canonical": "rgb(255 255 255 / 0.74)"
+      },
+      "on-night-3": {
+        "role": "secondary",
+        "displayName": "On Night, tertiary",
+        "canonical": "rgb(255 255 255 / 0.62)"
+      },
+      "night-border": {
+        "role": "secondary",
+        "displayName": "Night Border",
+        "canonical": "rgb(255 255 255 / 0.22)"
+      },
+      "night-line": {
+        "role": "secondary",
+        "displayName": "Night Line",
+        "canonical": "rgb(255 255 255 / 0.1)"
+      },
+      "night-fill": {
+        "role": "secondary",
+        "displayName": "Night Fill",
+        "canonical": "rgb(255 255 255 / 0.08)"
+      },
+      "on-tile": {
         "role": "neutral",
-        "displayName": "Mist",
-        "canonical": "#f5f5f7",
+        "displayName": "Tile Glyph",
+        "canonical": "oklch(100.0% 0.000 89.9)",
         "tonalRamp": [
-          "#0e0e0f",
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7",
-          "#f5f5f7"
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
         ]
       },
-      "white": {
+      "on-tile-light": {
         "role": "neutral",
-        "displayName": "White",
-        "canonical": "#ffffff",
+        "displayName": "Tile Glyph on light tiles",
+        "canonical": "oklch(19.0% 0.004 106.8)",
         "tonalRamp": [
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7",
-          "#f5f5f7",
-          "#ffffff"
+          "#0b0b0a",
+          "#252523",
+          "#424240",
+          "#61615f",
+          "#828280",
+          "#a5a5a3",
+          "#c9c9c7",
+          "#eeeeee"
         ]
       },
-      "night-card": {
+      "chip-glass": {
         "role": "neutral",
-        "displayName": "Night Card",
-        "canonical": "#1d1d1f",
-        "tonalRamp": [
-          "#000000",
-          "#161617",
-          "#1d1d1f",
-          "#424245",
-          "#5e5e63",
-          "#6e6e73",
-          "#a1a1a6",
-          "#d2d2d7"
-        ]
+        "displayName": "Chip Glass",
+        "canonical": "rgb(250 250 241 / 0.78)"
       },
-      "liquid-ground": {
+      "chip-glass-solid": {
         "role": "neutral",
-        "displayName": "Liquid Ground",
-        "canonical": "#04050d",
+        "displayName": "Chip Glass over dark",
+        "canonical": "rgb(255 255 255 / 0.94)"
+      },
+      "focus": {
+        "role": "secondary",
+        "displayName": "Liquid Cobalt",
+        "canonical": "oklch(47.8% 0.220 -94.7)",
         "tonalRamp": [
-          "#04050d",
-          "#0a1030",
-          "#0f2a8a",
-          "#2d4fd6",
-          "#6b48d8",
-          "#9b7cf0",
-          "#c9b9ff",
-          "#eef0ff"
+          "#010036",
+          "#030677",
+          "#0a24b4",
+          "#234edb",
+          "#4677f9",
+          "#7aa2fc",
+          "#b0c9ff",
+          "#e7efff"
         ]
       },
-      "available-green": {
+      "tone-crimson": {
         "role": "tertiary",
-        "displayName": "Available Green",
-        "canonical": "#1b6e33",
+        "displayName": "Crimson tone",
+        "canonical": "oklch(56.0% 0.198 21.3)",
         "tonalRamp": [
-          "#0c3016",
-          "#155628",
-          "#1b6e33",
-          "#2b7841",
-          "#34c759",
-          "#7ead8c",
-          "#cee0d3",
-          "#e9f8ed"
+          "#200001",
+          "#4b020d",
+          "#7c0e1e",
+          "#b7012a",
+          "#e03e4b",
+          "#fa7678",
+          "#fcb3b1",
+          "#fee9e8"
         ]
       },
-      "available-fill": {
+      "tone-teal": {
         "role": "tertiary",
-        "displayName": "Available Fill",
-        "canonical": "#e9f8ed",
+        "displayName": "Teal tone",
+        "canonical": "oklch(55.4% 0.097 -178.0)",
         "tonalRamp": [
-          "#0c3016",
-          "#155628",
-          "#1b6e33",
-          "#2b7841",
-          "#34c759",
-          "#7ead8c",
-          "#cee0d3",
-          "#e9f8ed"
+          "#000f0c",
+          "#012c27",
+          "#094d44",
+          "#157065",
+          "#299587",
+          "#61b7a9",
+          "#9fd6cc",
+          "#e1f3ef"
         ]
       },
-      "tone-crimson-ink": {
-        "role": "secondary",
-        "displayName": "Crimson Ink",
-        "canonical": "#b4232f",
+      "tone-blue": {
+        "role": "tertiary",
+        "displayName": "Blue tone",
+        "canonical": "oklch(52.0% 0.194 -98.5)",
         "tonalRamp": [
-          "#14020a",
-          "#5a0a1c",
-          "#b4232f",
-          "#c0283a",
-          "#e5283d",
-          "#ff6a55",
-          "#ff9a7a",
-          "#fdecee"
+          "#000038",
+          "#001e5d",
+          "#023897",
+          "#1656cd",
+          "#3a7bf4",
+          "#75a4f9",
+          "#adcafc",
+          "#e6effe"
         ]
       },
-      "tone-crimson-tint": {
-        "role": "secondary",
-        "displayName": "Crimson Tint",
-        "canonical": "#fdecee",
+      "tone-amber": {
+        "role": "tertiary",
+        "displayName": "Amber tone",
+        "canonical": "oklch(63.0% 0.138 67.3)",
         "tonalRamp": [
-          "#14020a",
-          "#5a0a1c",
-          "#b4232f",
-          "#c0283a",
-          "#e5283d",
-          "#ff6a55",
-          "#ff9a7a",
-          "#fdecee"
+          "#160700",
+          "#381e00",
+          "#5f3800",
+          "#895304",
+          "#b47117",
+          "#d79549",
+          "#eebf8f",
+          "#fcebdb"
         ]
       },
-      "tone-teal-ink": {
-        "role": "secondary",
-        "displayName": "Teal Ink",
-        "canonical": "#08766a",
+      "tone-violet": {
+        "role": "tertiary",
+        "displayName": "Violet tone",
+        "canonical": "oklch(51.3% 0.219 -70.1)",
         "tonalRamp": [
-          "#01141a",
-          "#04505a",
-          "#08766a",
-          "#0a7d70",
-          "#0e9a87",
-          "#0fa596",
-          "#8ff7e2",
-          "#e3f7f3"
+          "#0e002c",
+          "#2a0364",
+          "#4911a2",
+          "#6738d1",
+          "#865ff9",
+          "#a593fc",
+          "#c8c0ff",
+          "#eeecff"
         ]
       },
-      "tone-teal-tint": {
-        "role": "secondary",
-        "displayName": "Teal Tint",
-        "canonical": "#e3f7f3",
+      "tone-crimson-on-dark": {
+        "role": "tertiary",
+        "displayName": "Crimson (on dark) tone",
+        "canonical": "oklch(77.3% 0.134 17.2)",
         "tonalRamp": [
-          "#01141a",
-          "#04505a",
-          "#08766a",
-          "#0a7d70",
-          "#0e9a87",
-          "#0fa596",
-          "#8ff7e2",
-          "#e3f7f3"
+          "#1f0003",
+          "#4c0011",
+          "#791427",
+          "#9f3a45",
+          "#c55d65",
+          "#e6858a",
+          "#fab4b6",
+          "#fee9e9"
         ]
       },
-      "tone-violet-ink": {
-        "role": "secondary",
-        "displayName": "Violet Ink",
-        "canonical": "#6a3bd6",
+      "tone-teal-on-dark": {
+        "role": "tertiary",
+        "displayName": "Teal (on dark) tone",
+        "canonical": "oklch(84.6% 0.109 -179.4)",
         "tonalRamp": [
-          "#0b0620",
-          "#33178a",
-          "#6a3bd6",
-          "#7c3aed",
-          "#8357f0",
-          "#a35cf5",
-          "#c39bff",
-          "#f0eafe"
+          "#000f0c",
+          "#002c26",
+          "#064d44",
+          "#117164",
+          "#069785",
+          "#57b9a8",
+          "#9ad8cb",
+          "#dff4ef"
         ]
       },
-      "tone-violet-tint": {
-        "role": "secondary",
-        "displayName": "Violet Tint",
-        "canonical": "#f0eafe",
+      "tone-blue-on-dark": {
+        "role": "tertiary",
+        "displayName": "Blue (on dark) tone",
+        "canonical": "oklch(78.5% 0.109 -100.4)",
         "tonalRamp": [
-          "#0b0620",
-          "#33178a",
-          "#6a3bd6",
-          "#7c3aed",
-          "#8357f0",
-          "#a35cf5",
-          "#c39bff",
-          "#f0eafe"
+          "#000924",
+          "#052251",
+          "#1b407b",
+          "#3a609f",
+          "#5a82c4",
+          "#81a6e2",
+          "#b0cbf5",
+          "#e6effe"
         ]
       },
-      "tone-blue-ink": {
-        "role": "secondary",
-        "displayName": "Blue Ink",
-        "canonical": "#1a5bd1",
+      "tone-amber-on-dark": {
+        "role": "tertiary",
+        "displayName": "Amber (on dark) tone",
+        "canonical": "oklch(86.9% 0.128 81.1)",
         "tonalRamp": [
-          "#020a22",
-          "#0a3497",
-          "#1a5bd1",
-          "#0071e3",
-          "#1a8ff0",
-          "#2d7bff",
-          "#9be2ff",
-          "#e7f0ff"
+          "#130900",
+          "#332100",
+          "#573d01",
+          "#7e5a06",
+          "#a67a19",
+          "#c99d4a",
+          "#e3c58f",
+          "#f8eddb"
         ]
       },
-      "tone-blue-tint": {
-        "role": "secondary",
-        "displayName": "Blue Tint",
-        "canonical": "#e7f0ff",
+      "tone-violet-on-dark": {
+        "role": "tertiary",
+        "displayName": "Violet (on dark) tone",
+        "canonical": "oklch(77.1% 0.131 -64.8)",
         "tonalRamp": [
-          "#020a22",
-          "#0a3497",
-          "#1a5bd1",
-          "#0071e3",
-          "#1a8ff0",
-          "#2d7bff",
-          "#9be2ff",
-          "#e7f0ff"
-        ]
-      },
-      "tone-amber-ink": {
-        "role": "secondary",
-        "displayName": "Amber Ink",
-        "canonical": "#9a5200",
-        "tonalRamp": [
-          "#1a0c02",
-          "#6e3505",
-          "#9a5200",
-          "#c25e00",
-          "#e07b0e",
-          "#e58a0c",
-          "#ffc35a",
-          "#fdf2dd"
-        ]
-      },
-      "tone-amber-tint": {
-        "role": "secondary",
-        "displayName": "Amber Tint",
-        "canonical": "#fdf2dd",
-        "tonalRamp": [
-          "#1a0c02",
-          "#6e3505",
-          "#9a5200",
-          "#c25e00",
-          "#e07b0e",
-          "#e58a0c",
-          "#ffc35a",
-          "#fdf2dd"
+          "#0f0226",
+          "#2b1254",
+          "#492d7e",
+          "#684fa3",
+          "#8970c8",
+          "#aa96e6",
+          "#ccbff8",
+          "#efecfe"
         ]
       }
     },
     "typographyMeta": {
+      "display-xl": {
+        "displayName": "Display XL",
+        "purpose": "The 404 page's giant serif word."
+      },
+      "project-name": {
+        "displayName": "Project name",
+        "purpose": "The featured card's project name."
+      },
+      "name": {
+        "displayName": "Name",
+        "purpose": "Nathan's name in the contact panel."
+      },
+      "summary": {
+        "displayName": "Summary",
+        "purpose": "The featured card's summary."
+      },
+      "body-lg": {
+        "displayName": "Body large",
+        "purpose": "Contact links, sized like brandondavid.dev."
+      },
+      "email": {
+        "displayName": "Email",
+        "purpose": "The copyable email address in the contact block."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Keycaps and command-menu hints."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "The liquid-filled 'sta monica' h1 on the first screen; fills the width, runs off the bottom edge."
+      },
       "display": {
         "displayName": "Display",
-        "purpose": "The name in the identity card; one per page. 3rem tall, 2.5rem compact, 2.125rem short."
-      },
-      "display-compact": {
-        "displayName": "Display Compact",
-        "purpose": "The name on the compact desktop tier (<900px high)."
-      },
-      "display-short": {
-        "displayName": "Display Short",
-        "purpose": "The name on the short desktop tier."
-      },
-      "title-lg-short": {
-        "displayName": "Title Large Short",
-        "purpose": "Projects teaser title on the short tier."
-      },
-      "title-md": {
-        "displayName": "Title Medium",
-        "purpose": "Education school name; drops to 19px on the short tier."
-      },
-      "body-lead": {
-        "displayName": "Body Lead",
-        "purpose": "The Link Blue headline line under the name."
-      },
-      "body-secondary": {
-        "displayName": "Body Secondary",
-        "purpose": "Secondary and meta text: previously line, degree, teaser tagline, contact email, project meta, short-tier About copy and facts, skip link, compact in-card button labels."
-      },
-      "key-cap": {
-        "displayName": "Key Cap",
-        "purpose": "Text inside kbd key caps only."
+        "purpose": "The closing line and the 404 mark. The only other serif use."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "The contact close; the Projects section title at a smaller clamp."
+        "purpose": "The intro line, in medium weight."
       },
-      "title-lg": {
-        "displayName": "Title Large",
-        "purpose": "Projects teaser title; the education school at 22px."
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The About paragraph, beside the photo print."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Every white widget heading, sentence case."
+        "purpose": "Casual centred panel headings ending in an ellipsis."
       },
-      "lede": {
-        "displayName": "Lede",
-        "purpose": "Contact paragraph."
+      "item": {
+        "displayName": "Item",
+        "purpose": "Role titles and project names."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Page base and project summaries, max 60ch."
+        "purpose": "Default reading text."
       },
-      "body-card": {
-        "displayName": "Body Card",
-        "purpose": "Prose inside cards, max 64ch."
+      "body-sm": {
+        "displayName": "Body small",
+        "purpose": "Highlights and bullets, max 36rem."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Org and period lines in the tone ink, counts, status pill, footer."
+        "purpose": "Dates and organisation lines, tabular figures."
       },
-      "button": {
-        "displayName": "Button",
-        "purpose": "Pill buttons."
-      },
-      "chip": {
-        "displayName": "Chip",
-        "purpose": "Tags."
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Tags, footer, cursor chip."
       }
-    },
-    "toneSets": {
-      "crimson": {
-        "use": "RCMP; security tools",
-        "art": [
-          "#14020a",
-          "#5a0a1c",
-          "#c0283a"
-        ],
-        "glow": "#ff6a55",
-        "orb": "#ff9a7a",
-        "chipBg": "#fdecee",
-        "chipFg": "#b4232f",
-        "node": [
-          "#e5283d",
-          "#ec5a26"
-        ]
-      },
-      "teal": {
-        "use": "Shared Services Canada",
-        "art": [
-          "#01141a",
-          "#04505a",
-          "#0fa596"
-        ],
-        "glow": "#4ff0cf",
-        "orb": "#8ff7e2",
-        "chipBg": "#e3f7f3",
-        "chipFg": "#08766a",
-        "node": [
-          "#0a7d70",
-          "#0e9a87"
-        ]
-      },
-      "violet": {
-        "use": "Projects",
-        "art": [
-          "#0b0620",
-          "#33178a",
-          "#8357f0"
-        ],
-        "glow": "#c39bff",
-        "orb": "#f0a6ff",
-        "chipBg": "#f0eafe",
-        "chipFg": "#6a3bd6",
-        "node": [
-          "#7c3aed",
-          "#a35cf5"
-        ]
-      },
-      "blue": {
-        "use": "Correctional Service Canada",
-        "art": [
-          "#020a22",
-          "#0a3497",
-          "#2d7bff"
-        ],
-        "glow": "#78c2ff",
-        "orb": "#9be2ff",
-        "chipBg": "#e7f0ff",
-        "chipFg": "#1a5bd1",
-        "node": [
-          "#0071e3",
-          "#1a8ff0"
-        ]
-      },
-      "amber": {
-        "use": "Canada Revenue Agency",
-        "art": [
-          "#1a0c02",
-          "#6e3505",
-          "#e58a0c"
-        ],
-        "glow": "#ffc35a",
-        "orb": "#ffe08a",
-        "chipBg": "#fdf2dd",
-        "chipFg": "#9a5200",
-        "node": [
-          "#c25e00",
-          "#e07b0e"
-        ]
-      }
-    },
-    "liquid": {
-      "abyss": "vec3(0.004, 0.006, 0.030)",
-      "navy": "vec3(0.015, 0.040, 0.190)",
-      "cobalt": "vec3(0.060, 0.290, 1.000)",
-      "violet": "vec3(0.420, 0.160, 0.880)",
-      "sky": "vec3(0.620, 0.880, 1.000)",
-      "orchid": "vec3(0.980, 0.540, 0.930)",
-      "peach": "vec3(1.000, 0.720, 0.680)",
-      "fallback": "radial-gradient(55% 75% at 18% 42%, rgb(37 99 235 / 0.9) 0%, transparent 62%), radial-gradient(45% 60% at 78% 28%, rgb(124 58 237 / 0.85) 0%, transparent 62%), radial-gradient(40% 55% at 72% 82%, rgb(219 39 119 / 0.55) 0%, transparent 60%), radial-gradient(35% 45% at 40% 85%, rgb(56 189 248 / 0.35) 0%, transparent 60%), #04050d",
-      "fallbackPurpose": "Shown when WebGL is unavailable and behind the canvas while it boots; stops are the liquid-fallback-* colour tokens."
     },
     "shadows": [
       {
-        "name": "widget-lift",
-        "value": "0 1px 2px rgb(2 4 20 / 0.08), 0 24px 48px -24px rgb(2 4 20 / 0.55)",
-        "purpose": "Every white card floating on the liquid."
+        "name": "night-card",
+        "value": "0 36px 70px -40px rgb(11 14 29 / 0.65), 0 2px 6px rgb(11 14 29 / 0.12)",
+        "purpose": "The featured project card."
       },
       {
-        "name": "night-lift",
-        "value": "inset 0 0 0 1px rgb(255 255 255 / 0.1), 0 24px 48px -24px rgb(0 0 0 / 0.7)",
-        "purpose": "The night card; the inset ring defines its edge on the dark liquid."
+        "name": "tile",
+        "value": "inset 0 0 0 1px rgb(17 17 16 / 0.07), 0 14px 26px -18px rgb(17 17 16 / 0.5)",
+        "purpose": "Tech tiles; the inset hairline keeps light tiles visible on paper."
       },
       {
-        "name": "glass-icon",
-        "value": "inset 0 1.5px 0 rgb(255 255 255 / 0.8), inset 0 -16px 40px rgb(0 0 0 / 0.12), 0 40px 70px -26px rgb(0 0 0 / 0.7)",
-        "purpose": "The tilted glass tile in case art."
+        "name": "floating-chip",
+        "value": "0 8px 22px -10px rgb(17 17 16 / 0.35), inset 0 0 0 1px rgb(17 17 16 / 0.07)",
+        "purpose": "The cursor chip."
       },
       {
-        "name": "palette-float",
-        "value": "0 40px 100px -20px rgb(0 0 0 / 0.5)",
-        "purpose": "Command palette sheet over a 30% black, 3px blur scrim."
+        "name": "print",
+        "value": "0 34px 60px -36px rgb(17 17 16 / 0.55), 0 2px 6px rgb(17 17 16 / 0.12)",
+        "purpose": "The About photo print."
       },
       {
-        "name": "status-dot-ring",
-        "value": "0 0 0 3px rgb(52 199 89 / 0.22)",
-        "purpose": "Availability dot halo."
-      },
-      {
-        "name": "timeline-node",
-        "value": "0 0 0 3px #fff, 0 0 0 4.5px var(--chip-bg)",
-        "purpose": "Timeline dot ring and tone-tint halo."
-      },
-      {
-        "name": "focus-ring",
-        "value": "outline: 2px solid #0071e3; outline-offset: 3px",
-        "purpose": "All keyboard focus; drawn on the card when it holds a scroller."
+        "name": "menu",
+        "value": "0 40px 100px -24px rgb(17 17 16 / 0.45)",
+        "purpose": "The ⌘K dialog."
       }
     ],
     "motion": [
       {
-        "name": "ease-apple",
-        "value": "cubic-bezier(0.28, 0.11, 0.32, 1)",
-        "purpose": "Button state transitions (0.25s) and the palette scrim (0.2s)."
-      },
-      {
         "name": "ease-out-expo",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Arrivals and physical motion: card rise, palette panel, case-art tilt and lift, tech logo hover."
+        "purpose": "Every eased transition: wordmark rise, reveals, chevrons, tile lift."
       },
       {
-        "name": "rise",
-        "value": "1.1s ease-out-expo; from opacity 0, translateY(18px) scale(0.985), blur(6px); 70ms stagger per card",
-        "purpose": "The one authored load moment: widgets rise onto the liquid in reading order."
+        "name": "deck-spring",
+        "value": "stiffness 90, damping ratio 0.86 (about 0.5s)",
+        "purpose": "Moving between deck panels; the incoming panel blurs from 14px to sharp."
       },
       {
-        "name": "panel-in",
-        "value": "0.28s ease-out-expo; from opacity 0, translateY(-8px) scale(0.98)",
-        "purpose": "Command palette open."
+        "name": "wordmark-rise",
+        "value": "translateY(78%) to 0, 1.4s, ease-out-expo, 0.1s delay",
+        "purpose": "The wordmark entering on load."
       },
       {
-        "name": "button-press",
-        "value": "scale(0.97) on :active, 0.25s ease-apple",
-        "purpose": "Pill buttons."
+        "name": "soft-in",
+        "value": "opacity 0, blur(10px), translateY(10px) to rest, 1.1s, staggered 0.35/0.5/0.62s",
+        "purpose": "The intro copy after the wordmark."
       },
       {
-        "name": "art-tilt",
-        "value": "0.9s ease-out-expo; pointer-driven rotateX/rotateY, -12px lift on hover",
-        "purpose": "Case-art glass icon."
+        "name": "reveal",
+        "value": "opacity 0, blur(12px), translateY(16px) to rest, 0.9s",
+        "purpose": "Panels entering the screen in flow mode."
       },
       {
-        "name": "logo-hover",
-        "value": "scale(1.14), 0.45s ease-out-expo",
-        "purpose": "Tech grid logos."
-      },
-      {
-        "name": "reduced-motion",
-        "value": "animation and transition durations 0.01ms",
-        "purpose": "prefers-reduced-motion: reduce."
+        "name": "marquee",
+        "value": "linear, 52s / 60s / 56s per loop, alternating directions",
+        "purpose": "The three rows of tech tiles."
       }
     ],
     "breakpoints": [
       {
-        "name": "sm",
-        "value": "640px"
+        "name": "phone",
+        "value": "max-width: 767px"
       },
       {
-        "name": "md",
-        "value": "768px"
+        "name": "tablet",
+        "value": "768px to 1023px"
       },
       {
-        "name": "lg",
-        "value": "1024px"
+        "name": "portrait-tablet",
+        "value": "max-width: 1023px and portrait (stacked wordmark)"
       },
       {
-        "name": "xl",
-        "value": "1280px"
+        "name": "deck",
+        "value": "min-width: 1024px, min-height: 560px, hover and fine pointer"
       },
       {
-        "name": "tall",
-        "value": "(min-width: 1280px) and (min-height: 900px)"
-      },
-      {
-        "name": "compact",
-        "value": "(min-width: 1280px) and (max-height: 899.98px)"
-      },
-      {
-        "name": "short",
-        "value": "(min-width: 1280px) and (max-height: 740px), (min-width: 1280px) and (max-width: 1365.98px) and (max-height: 799.98px)"
+        "name": "roomy",
+        "value": "min-width: 1280px and min-height: 820px"
       }
     ]
   },
   "components": [
     {
-      "name": "Primary Button",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "The one action per group, e.g. Résumé.",
-      "html": "<button class=\"ds-btn ds-btn-primary\">Résumé <svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 17 17 7M8.5 7H17v8.5\"/></svg></button>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px;border:1px solid transparent;border-radius:999px;font:500 15px/1 -apple-system,BlinkMacSystemFont,Inter,'Segoe UI',Roboto,sans-serif;letter-spacing:-0.01em;white-space:nowrap;cursor:pointer;transition:background-color .25s cubic-bezier(.28,.11,.32,1),border-color .25s cubic-bezier(.28,.11,.32,1),transform .25s cubic-bezier(.28,.11,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:2px solid #0071e3;outline-offset:3px}.ds-btn-primary{background:#0071e3;color:#fff}.ds-btn-primary:hover{background:#0077ed}"
-    },
-    {
-      "name": "Dark Button",
-      "kind": "button",
-      "refersTo": "button-dark",
-      "description": "Secondary action on white: Email, project links.",
-      "html": "<button class=\"ds-btn ds-btn-dark\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2.5\"/><path d=\"m4.5 7.5 7.5 5.5 7.5-5.5\"/></svg>Email</button>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px;border:1px solid transparent;border-radius:999px;font:500 15px/1 -apple-system,BlinkMacSystemFont,Inter,'Segoe UI',Roboto,sans-serif;letter-spacing:-0.01em;white-space:nowrap;cursor:pointer;transition:background-color .25s cubic-bezier(.28,.11,.32,1),border-color .25s cubic-bezier(.28,.11,.32,1),transform .25s cubic-bezier(.28,.11,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:2px solid #0071e3;outline-offset:3px}.ds-btn-dark{background:#1d1d1f;color:#fff}.ds-btn-dark:hover{background:#333336}"
-    },
-    {
-      "name": "Outline Button",
-      "kind": "button",
-      "refersTo": "button-outline",
-      "description": "Tertiary action on white, including icon-only social links.",
-      "html": "<button class=\"ds-btn ds-btn-outline\">More on GitHub</button>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px;border:1px solid transparent;border-radius:999px;font:500 15px/1 -apple-system,BlinkMacSystemFont,Inter,'Segoe UI',Roboto,sans-serif;letter-spacing:-0.01em;white-space:nowrap;cursor:pointer;transition:background-color .25s cubic-bezier(.28,.11,.32,1),border-color .25s cubic-bezier(.28,.11,.32,1),transform .25s cubic-bezier(.28,.11,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:2px solid #0071e3;outline-offset:3px}.ds-btn-outline{background:#fff;color:#1d1d1f;border-color:#d2d2d7}.ds-btn-outline:hover{border-color:#1d1d1f}"
-    },
-    {
-      "name": "Glass Button",
-      "kind": "button",
-      "refersTo": "button-glass",
-      "description": "Control over the liquid (copy email on the contact band).",
-      "html": "<div class=\"ds-liquid\"><button class=\"ds-btn ds-btn-glass\">Copy email</button></div>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px;border:1px solid transparent;border-radius:999px;font:500 15px/1 -apple-system,BlinkMacSystemFont,Inter,'Segoe UI',Roboto,sans-serif;letter-spacing:-0.01em;white-space:nowrap;cursor:pointer;transition:background-color .25s cubic-bezier(.28,.11,.32,1),border-color .25s cubic-bezier(.28,.11,.32,1),transform .25s cubic-bezier(.28,.11,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:2px solid #0071e3;outline-offset:3px}.ds-liquid{padding:24px;background:radial-gradient(60% 80% at 20% 40%,rgb(37 99 235 / .9),transparent 62%),radial-gradient(50% 70% at 80% 30%,rgb(124 58 237 / .85),transparent 62%),#04050d}.ds-btn-glass{color:#fff;background:rgb(255 255 255 / .1);border-color:rgb(255 255 255 / .24);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%)}.ds-btn-glass:hover{background:rgb(255 255 255 / .18);border-color:rgb(255 255 255 / .4)}"
-    },
-    {
-      "name": "Tone Chip",
-      "kind": "chip",
-      "refersTo": "chip-crimson",
-      "description": "Tag tinted by the nearest data-tone; mist when no tone is set.",
-      "html": "<ul class=\"ds-chips\"><li class=\"ds-chip\">TypeScript</li><li class=\"ds-chip ds-tone-crimson\">Splunk</li><li class=\"ds-chip ds-tone-teal\">Cisco</li></ul>",
-      "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}.ds-chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:7px;font:500 12px/1 -apple-system,BlinkMacSystemFont,Inter,'Segoe UI',Roboto,sans-serif;letter-spacing:-0.005em;color:#424245;background:#f5f5f7}.ds-tone-crimson{color:#b4232f;background:#fdecee}.ds-tone-teal{color:#08766a;background:#e3f7f3}"
-    },
-    {
-      "name": "Status Pill",
-      "kind": "chip",
-      "refersTo": "status-pill",
-      "description": "Availability only.",
-      "html": "<span class=\"ds-status\">Open to co-op and internship opportunities</span>",
-      "css": ".ds-status{display:inline-flex;align-items:center;gap:8px;min-height:30px;padding:4px 12px;border-radius:999px;background:#e9f8ed;color:#1b6e33;font:500 13px/1.3 -apple-system,BlinkMacSystemFont,Inter,'Segoe UI',Roboto,sans-serif;letter-spacing:-0.008em}.ds-status::before{content:'';width:8px;height:8px;flex-shrink:0;border-radius:50%;background:#34c759;box-shadow:0 0 0 3px rgb(52 199 89 / .22)}"
-    },
-    {
-      "name": "Widget Card",
-      "kind": "card",
-      "refersTo": "card",
-      "description": "Opaque white widget floating on the liquid, with a fact-icon row.",
-      "html": "<div class=\"ds-ground\"><section class=\"ds-card\"><h2 class=\"ds-card-title\">About me</h2><p class=\"ds-card-body\">Hi! I’m Nathan. I defend systems and build them.</p><p class=\"ds-fact\"><span class=\"ds-fact-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8\"/><path d=\"M4 12h16M12 4v16\"/></svg></span>I play basketball</p></section></div>",
-      "css": ".ds-ground{background:#04050d;padding:24px}.ds-card{border-radius:28px;padding:28px;background:#fff;color:#1d1d1f;box-shadow:0 1px 2px rgb(2 4 20 / .08),0 24px 48px -24px rgb(2 4 20 / .55);font-family:-apple-system,BlinkMacSystemFont,Inter,'Segoe UI',Roboto,sans-serif}.ds-card-title{margin:0;font-size:19px;line-height:1.25;font-weight:600;letter-spacing:-0.02em}.ds-card-body{margin:16px 0 0;font-size:15px;line-height:1.55;color:#424245}.ds-fact{display:flex;align-items:center;gap:12px;margin:16px 0 0;font-size:14.5px}.ds-fact-icon{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;color:#fff;background:linear-gradient(180deg,#e07b0e,#c25e00);box-shadow:inset 0 .5px 0 rgb(255 255 255 / .35)}.ds-fact-icon svg{width:17px;height:17px}"
-    },
-    {
-      "name": "Night Card",
-      "kind": "card",
-      "refersTo": "card-night",
-      "description": "The one dark widget per bento (Education).",
-      "html": "<div class=\"ds-ground\"><section class=\"ds-card-night\"><h2>Carleton University</h2><p>Honours BSc in Computer Science and Cybersecurity</p><p class=\"ds-period\">Sept 2023 – Apr 2028</p></section></div>",
-      "css": ".ds-ground{background:#04050d;padding:24px}.ds-card-night{border-radius:28px;padding:28px;background:#1d1d1f;color:#fff;box-shadow:inset 0 0 0 1px rgb(255 255 255 / .1),0 24px 48px -24px rgb(0 0 0 / .7);font-family:-apple-system,BlinkMacSystemFont,Inter,'Segoe UI',Roboto,sans-serif}.ds-card-night h2{margin:0;font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-0.022em}.ds-card-night p{margin:8px 0 0;font-size:14px;color:rgb(255 255 255 / .75)}.ds-card-night .ds-period{margin-top:12px;font-size:13px;color:rgb(255 255 255 / .6);font-variant-numeric:tabular-nums}"
-    },
-    {
-      "name": "Timeline Item",
+      "name": "Ink link",
       "kind": "custom",
-      "refersTo": "card",
-      "description": "Experience role with tone node, rail, org line and tone bullets.",
-      "html": "<ol class=\"ds-tl\"><li class=\"ds-tl-item\"><h3>Cybersecurity Analyst</h3><p class=\"ds-tl-org\">RCMP · May–Aug 2026</p><p class=\"ds-tl-point\">Saved the team <strong>10 hrs/week</strong>.</p></li><li class=\"ds-tl-item ds-teal\"><h3>Network Operations Specialist</h3><p class=\"ds-tl-org\">Shared Services Canada · May 2025–May 2026</p></li></ol>",
-      "css": ".ds-tl{list-style:none;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,Inter,'Segoe UI',Roboto,sans-serif}.ds-tl-item{--g1:#e5283d;--chip-bg:#fdecee;--chip-fg:#b4232f;position:relative;padding:0 0 26px 24px}.ds-tl-item:last-child{padding-bottom:4px}.ds-tl-item::before{content:'';position:absolute;left:0;top:5px;width:11px;height:11px;border-radius:50%;background:var(--g1);box-shadow:0 0 0 3px #fff,0 0 0 4.5px var(--chip-bg)}.ds-tl-item:not(:last-child)::after{content:'';position:absolute;left:5px;top:22px;bottom:2px;width:1px;background:#d2d2d7}.ds-tl-item.ds-teal{--g1:#0a7d70;--chip-bg:#e3f7f3;--chip-fg:#08766a}.ds-tl h3{margin:0;font-size:15.5px;line-height:1.375;font-weight:600;letter-spacing:-0.014em;color:#1d1d1f}.ds-tl-org{margin:2px 0 0;font-size:13px;font-weight:500;color:var(--chip-fg)}.ds-tl-point{position:relative;margin:10px 0 0;padding-left:15px;font-size:13.5px;line-height:1.5;color:#424245}.ds-tl-point::before{content:'';position:absolute;left:1px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--g1)}.ds-tl-point strong{font-weight:600;color:#1d1d1f}"
+      "refersTo": "link",
+      "description": "Underlined ink link; the underline thickens on hover.",
+      "html": "<p class=\"ds-text\">I investigated phishing campaigns at <a class=\"ds-link\" href=\"#\">the RCMP</a>.</p>",
+      "css": ".ds-text { font: 500 17px/1.55 Inter, system-ui, sans-serif; letter-spacing: -0.011em; color: #111110; } .ds-link { color: #111110; text-decoration: underline 1px; text-underline-offset: 0.22em; transition: text-decoration-thickness .2s; } .ds-link:hover { text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: 2px solid #1f49d6; outline-offset: 3px; border-radius: 6px; }"
     },
     {
-      "name": "Case Art",
+      "name": "Panel heading",
       "kind": "custom",
-      "refersTo": "card",
-      "description": "Tone-lit studio scene with a tilted frosted glass icon that lifts on hover.",
-      "html": "<div class=\"ds-art\"><div class=\"ds-art-orb\"></div><div class=\"ds-art-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6.5 9v6M17.5 9v6M4 10.5v3M20 10.5v3M6.5 12h11\"/></svg></div></div>",
-      "css": ".ds-art{position:relative;overflow:hidden;isolation:isolate;width:260px;aspect-ratio:1;border-radius:28px;background:linear-gradient(172deg,#0b0620 0%,#33178a 52%,#8357f0 100%)}.ds-art::before{content:'';position:absolute;left:-10%;bottom:-38%;width:120%;height:72%;background:radial-gradient(closest-side,#c39bff,transparent);opacity:.75;z-index:-1}.ds-art-orb{position:absolute;width:36%;aspect-ratio:1;left:51%;top:19%;border-radius:50%;background:radial-gradient(circle at 38% 34%,rgb(255 255 255 / .85),#f0a6ff 32%,transparent 70%);opacity:.85}.ds-art-icon{position:absolute;left:50%;top:46%;width:40%;aspect-ratio:1;display:grid;place-items:center;border-radius:24%;color:#fff;background:linear-gradient(150deg,rgb(255 255 255 / .5),rgb(255 255 255 / .1) 46%,rgb(255 255 255 / .2));border:1px solid rgb(255 255 255 / .42);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);box-shadow:inset 0 1.5px 0 rgb(255 255 255 / .8),inset 0 -16px 40px rgb(0 0 0 / .12),0 40px 70px -26px rgb(0 0 0 / .7);translate:-50% -50%;transform:perspective(1000px) rotateX(16deg) rotateY(-20deg) rotateZ(-7deg);transition:transform .9s cubic-bezier(.16,1,.3,1)}.ds-art:hover .ds-art-icon{transform:perspective(1000px) rotateX(16deg) rotateY(-20deg) rotateZ(-7deg) translateY(-12px)}.ds-art-icon svg{width:46%;height:46%;filter:drop-shadow(0 2px 14px rgb(255 255 255 / .55))}"
+      "refersTo": "panel-heading",
+      "description": "The casual, centred sentence at the top of each panel.",
+      "html": "<h2 class=\"ds-heading\">Where I’ve been working…</h2>",
+      "css": ".ds-heading { margin: 0; text-align: center; font: 500 23px/1.3 Inter, system-ui, sans-serif; letter-spacing: -0.016em; color: #111110; }"
+    },
+    {
+      "name": "Role row",
+      "kind": "custom",
+      "refersTo": "role-row",
+      "description": "A collapsible experience row: period, role, organisation with tone dot, highlight, chevron.",
+      "html": "<div class=\"ds-row\"><span class=\"ds-row-period\">May 2026 – Aug 2026</span><span class=\"ds-row-head\"><span class=\"ds-row-title\">Cybersecurity Analyst</span><span class=\"ds-row-org\"><i class=\"ds-dot\"></i>RCMP</span></span><span class=\"ds-row-hl\">Automated vulnerability tracking, saving the team <b>10 hours a week</b></span><svg class=\"ds-chev\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m6 9.5 6 6 6-6\"/></svg></div>",
+      "css": ".ds-row { display: grid; grid-template-columns: 10.5rem 14rem 1fr 20px; gap: 6px 24px; align-items: baseline; padding: 18px 14px; border-radius: 14px; border-bottom: 1px solid rgb(17 17 16 / .13); font-family: Inter, system-ui, sans-serif; color: #111110; background: #eeeee0; cursor: pointer; transition: background-color .2s; } .ds-row:hover { background: #e4e4d3; } .ds-row-period { font-size: 14px; color: #5b5b53; font-variant-numeric: tabular-nums; } .ds-row-head { display: flex; flex-direction: column; gap: 2px; } .ds-row-title { font-size: 17px; font-weight: 500; letter-spacing: -0.016em; } .ds-row-org { display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; color: #5b5b53; } .ds-dot { width: 8px; height: 8px; border-radius: 99px; background: #cf2b3d; } .ds-row-hl { font-size: 15.5px; line-height: 1.5; color: #2d2d29; } .ds-chev { width: 20px; height: 20px; align-self: center; color: #5b5b53; }"
+    },
+    {
+      "name": "Featured project card",
+      "kind": "card",
+      "refersTo": "feature-card",
+      "description": "The single dark object: the newest project.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-head\"><h3 class=\"ds-card-name\">AI Personal Trainer</h3><span class=\"ds-card-badge\">Personal project</span></div><p class=\"ds-card-sum\">An AI coach that watches your form.</p><ul class=\"ds-card-stack\"><li>Next.js</li><li>TypeScript</li><li>Gemini 2.5 Flash</li></ul></article>",
+      "css": ".ds-card { max-width: 520px; padding: 28px; border-radius: 26px; background: #0b0e1d; color: rgb(255 255 255 / .9); font-family: Inter, system-ui, sans-serif; box-shadow: 0 36px 70px -40px rgb(11 14 29 / .65), 0 2px 6px rgb(11 14 29 / .12); } .ds-card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; } .ds-card-name { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.022em; color: #bba3ff; } .ds-card-badge { padding: 3px 10px; border: 1px solid rgb(255 255 255 / .22); border-radius: 99px; font-size: 12.5px; color: rgb(255 255 255 / .86); } .ds-card-sum { margin: 16px 0 0; font-size: 17px; line-height: 1.55; } .ds-card-stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; padding: 0; list-style: none; } .ds-card-stack li { padding: 3px 10px; border-radius: 99px; background: rgb(255 255 255 / .08); font-size: 12.5px; color: rgb(255 255 255 / .84); }"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "A tool or stack label on paper.",
+      "html": "<span class=\"ds-tag\">FortiSIEM</span>",
+      "css": ".ds-tag { display: inline-block; padding: 3px 10px; border-radius: 99px; background: #e4e4d3; color: #2d2d29; font: 500 13px/1.4 Inter, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Copyable email",
+      "kind": "button",
+      "refersTo": "contact-email",
+      "description": "The address itself copies on click; a note confirms. Fades on hover.",
+      "html": "<div class=\"ds-email-wrap\"><a class=\"ds-email\" href=\"mailto:nathanstamonica@gmail.com\">nathanstamonica@gmail.com</a><p class=\"ds-email-note\">Copied to clipboard</p></div>",
+      "css": ".ds-email-wrap { display: grid; justify-items: center; font-family: Inter, system-ui, sans-serif; } .ds-email { font-size: 20px; font-weight: 500; line-height: 1.15; letter-spacing: -0.03em; color: #111110; text-decoration: none; cursor: pointer; transition: opacity .2s; } .ds-email:hover { opacity: .6; } .ds-email:focus-visible { outline: 2px solid #1f49d6; outline-offset: 3px; border-radius: 6px; } .ds-email-note { margin: 6px 0 0; font-size: 13px; font-weight: 500; color: #5b5b53; }"
+    },
+    {
+      "name": "Tech tile",
+      "kind": "custom",
+      "refersTo": "tech-tile",
+      "description": "App-icon squircle in a brand colour; logos are single-colour masks.",
+      "html": "<span class=\"ds-tile\"><svg viewBox=\"0 0 24 24\" width=\"52%\" height=\"52%\" fill=\"#fff\"><path d=\"M12 2 2 7v10l10 5 10-5V7z\"/></svg></span>",
+      "css": ".ds-tile { display: inline-grid; place-items: center; width: 96px; height: 96px; border-radius: 26%; background: #2496ed; box-shadow: inset 0 0 0 1px rgb(17 17 16 / .07), 0 14px 26px -18px rgb(17 17 16 / .5); transition: transform .45s cubic-bezier(.16,1,.3,1); } .ds-tile:hover { transform: translateY(-4px) scale(1.04); }"
+    },
+    {
+      "name": "Photo print",
+      "kind": "custom",
+      "refersTo": "photo-print",
+      "description": "One real photo laid on the paper like a print, tilted -2deg; it arrives blurred and a click reveals it until the panel is left.",
+      "html": "<figure class=\"ds-print\"><div class=\"ds-print-img\"></div><figcaption class=\"ds-print-cap\">Half marathon, done.</figcaption></figure>",
+      "css": ".ds-print { width: 220px; margin: 0; transform: rotate(-2deg); transition: transform .6s cubic-bezier(.16,1,.3,1); } .ds-print:hover { transform: rotate(0deg) translateY(-4px); } .ds-print-img { aspect-ratio: 3 / 4; border-radius: 26px; background: linear-gradient(180deg, #8fb7e8 0%, #cdd9c2 55%, #7d7d78 100%); box-shadow: 0 34px 60px -36px rgb(17 17 16 / .55), 0 2px 6px rgb(17 17 16 / .12); } .ds-print-cap { margin-top: 12px; text-align: center; font: 500 13px/1.4 Inter, system-ui, sans-serif; color: #5b5b53; }"
+    },
+    {
+      "name": "Cursor chip",
+      "kind": "custom",
+      "refersTo": "cursor-chip",
+      "description": "Translucent pill that trails the mouse and names what it rests on.",
+      "html": "<span class=\"ds-cursor-chip\">sta monica</span>",
+      "css": ".ds-cursor-chip { display: inline-block; padding: 5px 11px; border-radius: 99px; background: rgb(250 250 241 / .78); backdrop-filter: blur(10px) saturate(1.4); box-shadow: 0 8px 22px -10px rgb(17 17 16 / .35), inset 0 0 0 1px rgb(17 17 16 / .07); font: 500 13px/1.2 Inter, system-ui, sans-serif; color: #111110; }"
     }
   ],
   "narrative": {
-    "northStar": "The Living Home Screen",
-    "overview": "The portfolio reads like an Apple home screen: opaque white widgets, softly lifted, laid out as a bento on top of a slowly moving wallpaper. The wallpaper is a full-page WebGL liquid in navy, cobalt, violet and orchid folds with iridescent sky-to-peach rims, lit by a lens that follows the pointer through the gutters. Everything the visitor reads sits on a card; the liquid is atmosphere, never a reading surface, except where the page closes on a darkened band of it.\n\nDensity is high but calm. On desktop windows of 1280px and wider the whole story fits in one viewport: identity, about, a full-height experience timeline, tech, a projects teaser and education. The cards carry SF Pro (Inter off Apple platforms) in tight negative tracking, ink on white, with Apple blue reserved for actions. Colour beyond that comes from five per-role tones that tint chips, org lines, bullets and timeline nodes, so each employer has its own quiet signature.\n\nMotion is a single authored moment, the widgets rising onto the liquid in reading order, plus two continuous interactions: the liquid lens and the glass-icon tilt on project art. Numbers stay understated: they sit in body copy at body weight, sometimes emphasised in semibold, never blown up into hero metrics.",
+    "northStar": "The Liquid Signature",
+    "overview": "Warm paper, black ink, and one living signature. The site is a deck of full-screen panels, each holding one idea: who Nathan is, where he has worked, what he has built, what he builds with, who he is outside work, and how to reach him. It is quiet on purpose, with wide margins, a single centred heading per panel and plenty of empty paper, so the two moments of colour carry the weight. The look follows brandondavid.dev, which Nathan chose as the reference, filled with his own, richer content.\n\nThe signature is the giant lowercase \"sta monica\" set in DM Serif Display along the bottom of the first screen. Its letters are filled with a WebGL liquid of navy, cobalt and violet with iridescent rims, which leans toward the pointer. Everything else stays typographic: Inter on paper, underlined ink links, hairline rows, small coloured dots for each employer. The only dark surface is the featured project card.\n\nOn laptops and desktops the panels behave like a deck. The wheel, the keys or a swipe move one panel at a time on a spring; the next panel slides up over the current one and sharpens from a blur while the one beneath fades. On phones and tablets the same panels scroll normally and sharpen as they enter. Without JavaScript the page is a plain, complete scroll with ink letters.",
     "keyCharacteristics": [
-      "Opaque white widget cards (28px radius) on a full-bleed WebGL liquid ground.",
-      "Apple system type stack, weight 600 headings with tight negative tracking.",
-      "One action blue; five per-role tones for everything categorical.",
-      "One night card and one tone-lit art card break the white rhythm per screen.",
-      "One-screen bento on desktop, with three height tiers that keep it on one screen.",
-      "One staggered rise on load; everything respects reduced motion."
+      "Warm paper ground (#eeeee0) and near-black ink; no white surfaces.",
+      "One serif voice (DM Serif Display) for the wordmark and the closing line; Inter for everything else.",
+      "Colour lives in two places only: the liquid inside the wordmark and the saturated brand tiles of the tech marquee.",
+      "One idea per full-screen panel, headed by a casual sentence that ends in an ellipsis.",
+      "Motion is structural: the wordmark rises, panels slide and sharpen, tiles slide; nothing decorative."
     ],
     "rules": [
       {
-        "name": "The One Action Blue Rule",
-        "body": "Apple Blue marks things you can press or that have focus. Categorical colour comes from the tones, never from the action blue.",
+        "name": "The Two Homes Rule",
+        "body": "Saturated colour appears in exactly two places: inside the wordmark (the liquid) and on the tech tiles. Tones elsewhere are dots and bullets, never fills, borders or text on paper.",
         "section": "colors"
       },
       {
-        "name": "The Tone Scope Rule",
-        "body": "A tone is applied by setting `data-tone` on a container; chips, bullets, timeline nodes and org lines inside inherit it. Never hand-pick a tone hex inside a component.",
+        "name": "The Paper Wins Rule",
+        "body": "The liquid canvas sits over the ink letters with `mix-blend-mode: lighten`, and every colour it draws is clamped to at most (0.86, 0.86, 0.82), darker than the paper. Over paper the paper wins and over the ink the liquid shows. Never let a liquid colour exceed the paper, or the canvas's rectangle appears around the letters.",
         "section": "colors"
       },
       {
-        "name": "The Subtle Floor Rule",
-        "body": "No text lighter than Subtle (#6e6e73) on white or mist. On dark grounds, white text stays at 60% opacity or more.",
-        "section": "colors"
-      },
-      {
-        "name": "The Quiet Numbers Rule",
-        "body": "Metrics live inside sentences at body size; emphasis is semibold ink via `**marked**` phrases in content, never a larger size, a colour, or a stat block.",
+        "name": "The One Serif Voice Rule",
+        "body": "DM Serif Display appears only in the wordmark, the closing line, the 404 mark and the link preview. Never use it for headings, buttons or UI.",
         "section": "typography"
       },
       {
-        "name": "The Sentence Case Rule",
-        "body": "Headings and labels are sentence case at normal or negative tracking. No uppercase tracked labels above headings.",
+        "name": "The Casual Heading Rule",
+        "body": "Panel headings are lowercase-style sentences in Inter regular, centred, ending in an ellipsis. No kicker, eyebrow or section number above them.",
         "section": "typography"
       },
       {
-        "name": "The One Screen Rule",
-        "body": "At 1280px and wider, every bento card is visible without scrolling at every height tier. New content goes in the Projects section or scrolls inside a card; it never grows the bento past the viewport.",
-        "section": "layout"
+        "name": "The Medium Ink Rule",
+        "body": "Every Inter text runs at 500 (one `--weight-text` setting). Hierarchy comes from size and colour first; names step up to 600, the featured project name to 700, and numbers marked in the copy to 700. Never set Inter below 500, and never ask DM Serif Display for a weight it does not have (it stays at 400).",
+        "section": "typography"
       },
       {
-        "name": "The Opaque Widget Rule",
-        "body": "Reading surfaces are fully opaque. Glass (backdrop blur) is reserved for things over the liquid or art: the copy-email button, the case-art icon, the palette sheet.",
+        "name": "The Flat Paper Rule",
+        "body": "Rows, tags, headings and links never cast shadows. If something needs separation on paper, use a hairline or the Pressed Paper fill.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do put every block of reading text on an opaque white or night card; the liquid shows only in gutters and the contact band.",
-      "Do keep Apple Blue (#0071e3) for actions, focus and selection only.",
-      "Do colour categorical things by setting `data-tone` (crimson, teal, blue, amber, violet) on the container.",
-      "Do use sentence-case Title (19px, 600, -0.02em) for card headings.",
-      "Do keep numbers inside sentences, emphasised at most with semibold ink.",
-      "Do use the one stroke icon family (24px grid, 1.6 stroke, round caps).",
-      "Do keep the desktop bento on one screen at all three height tiers.",
-      "Do gate every animation and the smooth scroll behind `prefers-reduced-motion: no-preference`.",
-      "Do meet WCAG AA: text no lighter than Subtle on light grounds and no lower than 60% white on dark."
+      "Do keep every panel on Warm Paper (#eeeee0). The paper is the brand.",
+      "Do put new colour only on the tech tiles or inside the wordmark (The Two Homes Rule).",
+      "Do head each panel with one casual, centred Inter sentence that ends in an ellipsis.",
+      "Do make anything new keyboard-reachable inside its panel; the deck follows focus.",
+      "Do keep numbers understated: bold weight inside running text, never big stat blocks.",
+      "Do give anything that must survive without JavaScript a native element (details/summary, plain links).",
+      "Do keep photography personal and singular: one real photo print in About, never stock imagery or decorative pictures."
     ],
     "donts": [
-      "Don't add uppercase tracked eyebrow or kicker labels above headings.",
-      "Don't use gradient-filled text; gradients belong to the liquid, case art, fact icons and the N mark.",
-      "Don't use emoji as icons.",
-      "Don't turn metrics into large stat blocks, counters or hero numbers.",
-      "Don't make reading cards translucent; glass is for controls and art over the liquid.",
-      "Don't add a second night card or a second action colour to a screen.",
-      "Don't introduce a second icon style or a filled icon set."
+      "Don't add white cards, glass panels or a background behind the whole page. The liquid lives only inside the wordmark.",
+      "Don't use DM Serif Display for headings, buttons or UI text (The One Serif Voice Rule).",
+      "Don't put kickers, eyebrows or section numbers above panel headings.",
+      "Don't add hero-metric blocks (big number, small label) for the resume figures.",
+      "Don't let any liquid colour reach the paper's lightness (The Paper Wins Rule).",
+      "Don't add a navigation bar or panel dots; the deck, the in-text links and ⌘K are the navigation."
     ]
   }
 }
