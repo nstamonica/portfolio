@@ -236,7 +236,7 @@ A paper-and-ink palette with a deep navy card, a cobalt focus colour, and one mu
 ### Neutral
 - **Warm Paper** (paper): the ground of every panel, the 404 page, the command menu and the link preview.
 - **Pressed Paper** (paper-2): hover fill for rows and the surface of tags.
-- **Graphite** (muted): dates, organisation names, the intro's credentials line, the contact lede and footer; 5.8:1 on paper.
+- **Graphite** (muted): dates, organisation names, the contact lede and footer, and the focus line in the link preview; 5.8:1 on paper.
 - **Hairline** (line): row dividers and the footer rule.
 
 The liquid's own colours live in the shader (components/liquid-canvas.tsx), not in CSS: abyss, navy, cobalt (#1236ff range), violet, sky, orchid and peach. They are always clamped darker than the paper.
@@ -357,6 +357,11 @@ Paper is flat. Depth comes from the deck itself: panels stack in z-order and sli
 - **Character:** the address itself is the control, as on brandondavid.dev: plain Email type, no underline, fading to 60% opacity on hover.
 - **Behavior:** clicking copies the address; a Caption-sized "Copied to clipboard" note appears in a reserved line beneath (announced to screen readers) and the cursor chip reads "copied!" (it reads "click to copy" on hover). It is a mailto link underneath, so without JavaScript or clipboard access it opens the mail app.
 - **Touch:** on touch screens the email's tap area grows 10px above and below without moving it, and the stacked Resume, LinkedIn and GitHub links take 10px of padding each, about 43px per target (Apple asks for 44pt).
+
+### Link preview (signature)
+- **Character:** the image LinkedIn, iMessage and Slack show when the site's link is shared: a poster of the liquid wordmark, not a copy of the first screen.
+- **Style:** 1200×630 Warm Paper. "sta" over "monica" in DM Serif Display at 340px (0.84 line height), left-aligned 48px in and whole, with even margins top and bottom. One rendered 1200×630 frame of the site's liquid shader (assets/og-liquid.png, mirrored so "sta" lands on its brightest blue) sits behind the whole card and shows only through the letters. In the paper beside "sta", right-aligned: the name (Inter 500, 38px, Black Ink) over the focus line (Inter 500, 24px, Graphite, max 420px), both from lib/content.ts.
+- **Refresh:** platforms cache previews; after a change, re-scrape the URL (LinkedIn's Post Inspector) and re-add any saved link.
 
 ## Do's and Don'ts
 

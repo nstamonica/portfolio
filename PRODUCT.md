@@ -47,6 +47,7 @@ Since November 2026 Nathan also wants his interest in **product management** vis
   - Brandon's touches he asked for: the wordmark rises in, a cursor pill follows the mouse, and the covered panel blurs and fades as the next one slides over it.
   - The intro reads as two lines on laptops, like Brandon's.
   - On phones the whole "sta monica" wordmark is visible, letters not cut off; on laptops it runs off the bottom edge as before.
+  - The link preview (what LinkedIn shows) is a poster of the liquid wordmark with his name, not a copy of the old first screen.
   - The featured project card links to its GitHub repo.
   - The content stays his own and richer than the reference: four roles, projects, tech, about.
   - Numbers should be understated, not flashy.

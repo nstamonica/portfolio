@@ -24,6 +24,8 @@ export const site = {
   github: "https://github.com/nstamonica",
   linkedin: "https://www.linkedin.com/in/nathanstamonica",
   resume: "/resume.pdf",
+  /** The small line under his name in the link preview (app/opengraph-image.tsx). */
+  focus: "Software engineering, product management and cybersecurity",
   availability: "Open to co-op and internship opportunities",
   copyrightYear: 2026,
 };
@@ -38,9 +40,6 @@ export const intro = {
     "I’m an undergraduate student passionate about software engineering,",
     "product management and building things that hold up.",
   ],
-  /** Used only by the link-preview image (app/opengraph-image.tsx); the first screen shows just the line. */
-  credentials:
-    "Computer Science & Cybersecurity at Carleton University. Previously at the RCMP, Shared Services Canada, Correctional Service Canada and the Canada Revenue Agency.",
 };
 
 /** The casual one-line headings at the top of each panel. */

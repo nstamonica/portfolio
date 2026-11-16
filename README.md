@@ -46,7 +46,7 @@ app/
   layout.tsx              root layout, fonts, metadata, cursor chip, command menu
   page.tsx                the six panels inside the deck
   not-found.tsx           404
-  opengraph-image.tsx     social preview image (built at build time)
+  opengraph-image.tsx     link preview: the liquid wordmark as a poster (built at build time)
   icon.svg                favicon
 components/
   panels/                 intro, experience, projects, tech, about, contact
