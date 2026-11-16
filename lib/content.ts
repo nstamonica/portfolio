@@ -16,7 +16,7 @@ export const site = {
   name: "Nathan Sta Monica",
   /** The giant liquid word on the first screen. */
   wordmark: "sta monica",
-  title: "Nathan Sta Monica — Software Engineering & Cybersecurity",
+  title: "Nathan Sta Monica - Portfolio Website",
   description:
     "Computer Science & Cybersecurity student at Carleton University. Previously at the RCMP, Shared Services Canada, Correctional Service Canada and the Canada Revenue Agency.",
   location: "Ottawa, Canada",
