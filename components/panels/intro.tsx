@@ -22,7 +22,14 @@ export function IntroPanel() {
         </div>
 
         <div className="intro-copy">
-          <p className="intro-line">{intro.line}</p>
+          <p className="intro-line">
+            {intro.lines.map((line, i) => (
+              <span key={i}>
+                {i > 0 && " "}
+                <span className="intro-part">{line}</span>
+              </span>
+            ))}
+          </p>
         </div>
       </div>
     </section>

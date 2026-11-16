@@ -1,12 +1,16 @@
 import { headings, projects, type Project } from "@/lib/content";
 import { cx } from "@/lib/cx";
-import { ArrowUpRight, ChevronDown, glyphs } from "../icons";
+import { ArrowUpRight, ChevronDown, GitHub, glyphs } from "../icons";
 
-function ProjectLinks({ project, className }: { project: Project; className: string }) {
-  if (!project.links?.length) return null;
+function ProjectLinks({ project, className, withRepo }: { project: Project; className: string; withRepo?: boolean }) {
+  const links = [
+    ...(withRepo && project.repo ? [{ label: "View on GitHub", href: project.repo }] : []),
+    ...(project.links ?? []),
+  ];
+  if (!links.length) return null;
   return (
     <ul className={className}>
-      {project.links.map((link) => (
+      {links.map((link) => (
         <li key={link.href}>
           <a href={link.href} target="_blank" rel="noopener noreferrer">
             {link.label}
@@ -36,7 +40,7 @@ export function ProjectsPanel() {
             id={`project-${featured.slug}`}
             className="feature-card"
             data-tone={featured.theme}
-            data-cursor={featured.name}
+            data-cursor={featured.repo ? "View on GitHub" : featured.name}
             data-cursor-dark
             aria-labelledby={`project-${featured.slug}-name`}
           >
@@ -46,6 +50,20 @@ export function ProjectsPanel() {
                 {featured.name}
               </h3>
               <span className="feature-badge">{featured.kind}</span>
+              {/* Its hit area covers the whole card (see .feature-repo in globals.css). */}
+              {featured.repo && (
+                <a
+                  href={featured.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="feature-repo"
+                  aria-label={`${featured.name} on GitHub (opens in a new tab)`}
+                >
+                  <GitHub className="size-4" />
+                  GitHub
+                  <ArrowUpRight className="feature-repo-arrow size-4" />
+                </a>
+              )}
             </header>
             <p className="feature-summary">{featured.summary}</p>
             <ul className="feature-points">
@@ -97,7 +115,7 @@ export function ProjectsPanel() {
                         <li key={item}>{item}</li>
                       ))}
                     </ul>
-                    <ProjectLinks project={project} className="project-item-links" />
+                    <ProjectLinks project={project} className="project-item-links" withRepo />
                   </div>
                 </details>
               ))}

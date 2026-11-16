@@ -3,7 +3,7 @@
  * page, such as the ⌘K menu, can move it without knowing how it works.
  */
 
-/** Media query for the full-screen snap panels. Phones and tablets scroll normally. */
+/** Media query for the full-screen panel deck. Phones and tablets scroll normally. */
 export const DECK_QUERY = "(min-width: 1024px) and (min-height: 560px) and (hover: hover) and (pointer: fine)";
 
 /** Fired on window when a panel enters or leaves the screen: detail is { id, visible }. */

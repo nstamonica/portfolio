@@ -162,6 +162,13 @@ components:
     textColor: "{colors.on-night}"
     rounded: "{rounded.card}"
     padding: "{spacing.card}"
+  repo-pill:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.night}"
+    rounded: "{rounded.pill}"
+    padding: "6px 11px 6px 10px"
+  repo-pill-hover:
+    backgroundColor: "{colors.paper-2}"
   tag:
     backgroundColor: "{colors.paper-2}"
     textColor: "{colors.ink-2}"
@@ -173,7 +180,7 @@ components:
     typography: "{typography.email}"
   tech-tile:
     rounded: "{rounded.tile}"
-    size: "clamp(64px, min(8.6vw, 12.6vh), 124px)"
+    size: "clamp(68px, min(9.4vw, 18.5vh), 168px)"
   cursor-chip:
     backgroundColor: "{colors.chip-glass}"
     textColor: "{colors.ink}"
@@ -200,14 +207,14 @@ Warm paper, black ink, and one living signature. The site is a deck of full-scre
 
 The signature is the giant lowercase "sta monica" set in DM Serif Display along the bottom of the first screen. Its letters are filled with a WebGL liquid of navy, cobalt and violet with iridescent rims, which leans toward the pointer. Everything else stays typographic: Inter on paper, underlined ink links, hairline rows, small coloured dots for each employer. The only dark surface is the featured project card.
 
-On laptops and desktops the panels behave like a deck. The wheel, the keys or a swipe move one panel at a time on a spring; the next panel slides up over the current one and sharpens from a blur while the one beneath fades. On phones and tablets the same panels scroll normally and sharpen as they enter. Without JavaScript the page is a plain, complete scroll with ink letters.
+On laptops and desktops the panels behave like a deck that scrolls the way brandondavid.dev does. Each panel rests for a third of a screen of scrolling, then the next one slides up over it, following the wheel or trackpad one to one, while the one beneath blurs and fades away behind it. The deck stops wherever the scrolling stops, even halfway, with both panels in view. The keys, in-page links and the ⌘K menu glide a whole panel on a spring. On phones and tablets the same panels scroll normally and sharpen as they enter. Without JavaScript the page is a plain, complete scroll with ink letters.
 
 **Key Characteristics:**
 - Warm paper ground (#eeeee0) and near-black ink; no white surfaces.
 - One serif voice (DM Serif Display) for the wordmark and the closing line; Inter for everything else.
 - Colour lives in two places only: the liquid inside the wordmark and the saturated brand tiles of the tech marquee.
 - One idea per full-screen panel, headed by a casual sentence that ends in an ellipsis.
-- Motion is structural: the wordmark rises, panels slide and sharpen, tiles slide; nothing decorative.
+- Motion is structural: the wordmark rises, panels slide over one another as you scroll while the covered one blurs away, tiles slide; nothing decorative.
 
 ## Colors
 
@@ -247,9 +254,9 @@ The liquid's own colours live in the shader (components/liquid-canvas.tsx), not 
 **Character:** A heavy, high-contrast display serif used like a signature, over a slightly tight Inter set in medium weight throughout, so the plain words carry some of the serif's heft (Nathan asked for everything bolder, like brandondavid.dev).
 
 ### Hierarchy
-- **Wordmark** (400, sized so "sta monica" fills the width, 0.86): the h1 along the bottom of the first screen. It runs off the bottom edge, and on phones and portrait tablets it stacks as "sta" over "monica".
+- **Wordmark** (400, sized so "sta monica" fills the width, 0.86): the h1 along the bottom of the first screen. On laptops and desktops it runs off the bottom edge. On phones and tablets the letters stay whole, ending one wordmark-padding (10px on a phone) above the bottom of the first screen, as Nathan asked. Held upright, phones and tablets stack it as "sta" over "monica"; a phone turned sideways shows the one-line wordmark, so the whole word fits its short screen.
 - **Display** (400, clamp(44px, 5.2vw, 96px), 1.02): the closing line "Let's build something secure." (balanced, max 16ch). **Display XL** is the 404's giant "lost".
-- **Headline** (500, clamp(22px, 1.4vw + 13px, 34px), 1.34): the intro line, right-aligned on wide screens and centred on phones. The medium weight is deliberate; Nathan wanted it bolder than regular Inter, closer to brandondavid.dev.
+- **Headline** (500, clamp(22px, 1.4vw + 13px, 34px), 1.34): the intro line, right-aligned on wide screens and centred on phones. From 960px it sets as exactly two lines, broken where the copy splits it ("…software engineering, / product management…"), like brandondavid.dev's two-line intro; narrower screens wrap it as one sentence. The medium weight is deliberate; Nathan wanted it bolder than regular Inter, closer to brandondavid.dev.
 - **Lead** (400, clamp(18px, 0.75vw + 12px, 24px), 1.5): the About paragraph, left-aligned beside the photo (centred on phones), max 40rem.
 - **Title** (400, clamp(19px, 0.9vw + 9px, 23px), 1.3): the casual, centred panel headings ("Where I've been working…").
 - **Project name** (700, clamp(22px, 0.9vw + 13px, 27px)) and **Summary** (500, clamp(16px, 0.25vw + 14px, 18px)): the featured card.
@@ -270,10 +277,11 @@ The liquid's own colours live in the shader (components/liquid-canvas.tsx), not 
 
 Six full-screen panels in a fixed order: Intro, Experience, Projects, Tech, About, Contact.
 
-- **Deck mode** (at least 1024px wide and 560px tall, with a fine pointer): panels are fixed and fill the screen. Content centres vertically inside a vertical padding of panel-deck. A long list (open roles, extra projects) scrolls inside its panel before the deck moves.
+- **Deck mode** (at least 1024px wide and 560px tall, with a fine pointer): panels are fixed, fill the screen and are see-through, so the covered panel shows through as the next one slides over it. Content centres vertically inside a vertical padding of panel-deck. Resting on a panel, a long list (open roles, extra projects) scrolls inside it before the deck moves.
+- **The scroll track** (deck mode): scrolling moves along an imaginary track where each panel rests for a third of a screen's height, then the next panel slides up over one screen's height of scrolling, one to one with the wheel, eased toward it at a follow rate of 7 per second. The covered panel blurs from 0 to 12px by the time the next one is 60% of the way up and fades out between 40% and 70%. Nothing snaps: stopping halfway leaves both panels on screen. A key from there finishes the move in its direction. With reduced motion the panels stay opaque and unblurred and follow the wheel without easing.
 - **Flow mode** (phones, tablets, no JavaScript): panels stack with panel-flow padding. The intro is at least one screen tall, with the wordmark at its bottom.
-- **Containers**: content is max 1120px wide, or 1360px for the tech marquee and footer. The page gutter is clamp(16px, 4.4vw, 72px).
-- **Intro grid**: rows of 0.82fr / the intro line / 1fr / wordmark. The intro line is the only copy on the first screen, right-aligned near 30% of the height on wide screens and centred under 768px.
+- **Containers**: content is max 1120px wide; the tech marquee runs the full width inside the gutters, and the footer is max 1360px. The page gutter is clamp(16px, 4.4vw, 72px).
+- **Intro grid**: rows of 0.82fr / the intro line / 1fr / wordmark. The intro line is the only copy on the first screen, right-aligned near 30% of the height on wide screens (two lines from 960px) and centred under 768px.
 - **Experience rows** form a four-column grid (date 10.5rem · role 16.5rem · highlight · chevron). From 768 to 1023px they become two columns, and under 768px a single stacked column.
 - **Projects**: the newest project is the big card. With more projects, the card and a list sit side by side (1.25fr / 1fr), stacking under 900px.
 - **About**: the photo print and the paragraph sit side by side (auto / 1fr, gap clamp(32px, 5vw, 88px), max 1080px). The photo is min(380px, 27vw, 44vh) wide so it always fits the screen height. Under 768px it stacks, photo first.
@@ -281,10 +289,10 @@ Six full-screen panels in a fixed order: Intro, Experience, Projects, Tech, Abou
 
 ## Elevation & Depth
 
-Paper is flat. Depth comes from the deck itself: panels stack in z-order and slide over one another. Only four things cast shadows, all soft and offset downward.
+Paper is flat. Depth comes from the deck itself: panels stack in z-order and slide over one another, and the one underneath recedes by blurring (up to 12px) and fading. Only a few things cast shadows, all soft and offset downward.
 
 ### Shadow Vocabulary
-- **Night card** (`box-shadow: 0 36px 70px -40px rgb(11 14 29 / 0.65), 0 2px 6px rgb(11 14 29 / 0.12)`): the featured project card.
+- **Night card** (`box-shadow: 0 36px 70px -40px rgb(11 14 29 / 0.65), 0 2px 6px rgb(11 14 29 / 0.12)`): the featured project card. When it links to a repo, hovering lifts it 4px and deepens the first layer to `0 46px 80px -40px rgb(11 14 29 / 0.72)`.
 - **Tile** (`box-shadow: inset 0 0 0 1px rgb(17 17 16 / 0.07), 0 14px 26px -18px rgb(17 17 16 / 0.5)`): each tech tile; the inset hairline keeps the white Express tile visible on paper.
 - **Floating chip** (`box-shadow: 0 8px 22px -10px rgb(17 17 16 / 0.35), inset 0 0 0 1px rgb(17 17 16 / 0.07)`): the cursor chip.
 - **Print** (`box-shadow: 0 34px 60px -36px rgb(17 17 16 / 0.55), 0 2px 6px rgb(17 17 16 / 0.12)`): the About photo.
@@ -295,7 +303,7 @@ Paper is flat. Depth comes from the deck itself: panels stack in z-order and sli
 
 ## Shapes
 
-- **Pills** (99px): tags, the copy button, the cursor chip and the project badge.
+- **Pills** (99px): tags, the cursor chip, the project badge and the GitHub pill.
 - **Rows** (14px): hover fills for role and project rows.
 - **Card** (26px): the featured project card.
 - **Tiles** (26%): app-icon squircles for the tech tiles.
@@ -317,23 +325,24 @@ Paper is flat. Depth comes from the deck itself: panels stack in z-order and sli
 
 ### Featured project card
 - **Character:** the one dark object on the page, like a GitHub repository card.
-- **Style:** a Night background, 26px corners and the night-card shadow, max 640px wide. A glyph icon, the name in its `-on-dark` tone (600 weight) and an outlined pill badge, then the summary, bullets, a hairline, stack chips (white at 0.08) and the dates.
-- **Links:** white pills with navy text, each with an arrow icon.
+- **Style:** a Night background, 26px corners and the night-card shadow, max 640px wide. A glyph icon, the name in its `-on-dark` tone (700 weight) and an outlined pill badge, then the summary, bullets, a hairline, stack chips (white at 0.08) and the dates.
+- **Repo link:** with a `repo` in the content, the whole card is a link to it. A Warm Paper pill sits at the right of the header (the GitHub mark, "GitHub" in 600 weight, an up-right arrow), and its hit area stretches over the card, so a click anywhere opens the repository in a new tab. On hover the card lifts 4px, its shadow deepens, the pill turns Pressed Paper and the arrow nudges 2px up and right. Keyboard focus rings the whole card. The cursor chip reads "View on GitHub". Without a repo the card is plain and the chip names the project.
+- **Other links:** Warm Paper pills with navy text, each with an arrow icon, at the foot of the card and above the card-wide link.
 
 ### Project list
-- **Style:** role-row anatomy (a tone dot, the name, a tagline in Graphite, the dates, a chevron). Each opens to a summary, bullets, tags and underlined links.
+- **Style:** role-row anatomy (a tone dot, the name, a tagline in Graphite, the dates, a chevron). Each opens to a summary, bullets, tags and underlined links, starting with "View on GitHub" when it has a repo.
 
 ### Tech tiles (signature)
 - **Character:** app icons sliding past, in brand colours.
-- **Style:** squircles (26%) in each technology's brand colour. The single-colour logo is drawn as a CSS mask, in white or in #141412 on light tiles.
-- **Motion:** three rows slide linearly in alternating directions (52s, 60s and 56s per loop) behind a 9% edge fade. A row pauses on hover; a hovered tile lifts 4px and scales to 1.04. Under reduced motion the tiles sit still in a centred grid.
+- **Style:** squircles (26%) in each technology's brand colour, sized like brandondavid.dev's (9vw) and a touch over: 9.4vw, capped at 18.5% of the screen's height so the three rows always fit (about 132px on a 1400×800 laptop, 168px at most). Rows sit 0.3 of a tile apart and tiles 0.24. The single-colour logo is drawn as a CSS mask, in white or in #141412 on light tiles.
+- **Motion:** three rows slide linearly in alternating directions (52s, 60s and 56s per loop) behind a 9% edge fade, and keep sliding while any part of their panel is on screen. A row pauses on hover; a hovered tile lifts 4px and scales to 1.04. Under reduced motion the tiles sit still in a centred grid.
 
 ### The liquid wordmark (signature)
 - **Construction:** the h1 is real ink text; the WebGL canvas sits over it with lighten blending (see The Paper Wins Rule). The canvas pauses when its panel is covered or off screen, adapts its resolution, and renders one still frame under reduced motion.
 - **Motion:** it rises 78% from below over 1.4s with exponential ease-out; the intro copy sharpens from a 10px blur after it.
 
 ### Cursor chip
-- **Style:** a translucent paper pill (blur 10px) trailing the mouse at a +16/+14px offset with a light spring. It reads "sta monica", or the name in the `data-cursor` attribute of whatever it rests on (tiles, the project card). Over the dark card it becomes nearly opaque. It doesn't exist on touch screens.
+- **Style:** a translucent paper pill (blur 10px) trailing the mouse at a +16/+14px offset with a light spring. It reads "sta monica", or the label in the `data-cursor` attribute of whatever it rests on (a tile's name, "View on GitHub" on the project card, the photo's moment, "click to copy" on the email). Over the dark card it becomes nearly opaque. It doesn't exist on touch screens.
 
 ### Command menu (⌘K)
 - **Style:** a paper dialog with 22px corners and the menu shadow over a 25% ink scrim. Options use 12px corners; the selected one is ink with paper text. It jumps to panels, roles and projects, copies the email address, and opens external links.
@@ -347,6 +356,7 @@ Paper is flat. Depth comes from the deck itself: panels stack in z-order and sli
 ### Copyable email (Contact)
 - **Character:** the address itself is the control, as on brandondavid.dev: plain Email type, no underline, fading to 60% opacity on hover.
 - **Behavior:** clicking copies the address; a Caption-sized "Copied to clipboard" note appears in a reserved line beneath (announced to screen readers) and the cursor chip reads "copied!" (it reads "click to copy" on hover). It is a mailto link underneath, so without JavaScript or clipboard access it opens the mail app.
+- **Touch:** on touch screens the email's tap area grows 10px above and below without moving it, and the stacked Resume, LinkedIn and GitHub links take 10px of padding each, about 43px per target (Apple asks for 44pt).
 
 ## Do's and Don'ts
 
@@ -357,6 +367,7 @@ Paper is flat. Depth comes from the deck itself: panels stack in z-order and sli
 - **Do** make anything new keyboard-reachable inside its panel; the deck follows focus.
 - **Do** keep numbers understated: bold weight inside running text, never big stat blocks.
 - **Do** give anything that must survive without JavaScript a native element (details/summary, plain links).
+- **Do** put hover-only effects inside `@media (hover: hover)`: on an iPhone a tap would leave them stuck on (a faded email, a grey row, a paused marquee).
 - **Do** keep photography personal and singular: one real photo print in About, never stock imagery or decorative pictures.
 
 ### Don't:

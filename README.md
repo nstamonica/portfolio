@@ -6,10 +6,10 @@ A one-page, fully static site built with **Next.js 16**, **React 19**, **TypeScr
 
 ## Highlights
 
-- **Page deck.** On laptops and desktops the page is six full-screen panels: Intro, Experience, Projects, Tech, About, Contact. The scroll wheel, arrow keys, Page Up/Down, Space or a swipe move one panel at a time on a spring, and each panel sharpens from a blur as it arrives. Phones and tablets get the same panels as a normal scroll.
+- **Page deck.** On laptops and desktops the page is six full-screen panels: Intro, Experience, Projects, Tech, About, Contact. Scrolling works like brandondavid.dev: each panel rests for a moment, then the next slides up over it one-to-one with the wheel or trackpad while the one underneath blurs and fades, and it stops wherever you stop, even halfway. Arrow keys, Page Up/Down, Space, in-page links and ⌘K glide a whole panel at a time. Phones and tablets get the same panels as a normal scroll.
 - **Liquid wordmark.** A hand-written GLSL shader (iterated domain warping with iridescent rims) fills the letters of "sta monica" and leans toward the pointer. The real text stays underneath (the canvas blends over it), so it falls back to ink letters without WebGL. The shader pauses when off screen and renders a single still frame for `prefers-reduced-motion`.
 - **Experience.** All four roles on one panel. Each shows its headline result and opens (native `<details>`) to every point and tool.
-- **Projects that grow.** The newest project is the big card; add more and they're listed beside it. Each also appears in the ⌘K menu.
+- **Projects that grow.** The newest project is the big card, and the whole card links to its GitHub repo; add more and they're listed beside it. Each also appears in the ⌘K menu.
 - **Sliding tech tiles.** Three rows of app-icon tiles in brand colours.
 - **Cursor chip.** A small "sta monica" label trails the mouse and names the tile or project under it.
 - **⌘K command menu.** Jump to any panel, role or project, copy the email address, or open links.

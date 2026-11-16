@@ -36,7 +36,7 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: "flex", maxWidth: 840, fontSize: 38, fontWeight: 500, lineHeight: 1.3, textAlign: "right", letterSpacing: -1 }}>
-          {intro.line}
+          {intro.lines.join(" ")}
         </div>
         <div style={{ display: "flex", maxWidth: 720, marginTop: 20, fontSize: 22, fontWeight: 500, lineHeight: 1.45, textAlign: "right", color: "#5b5b53" }}>
           {intro.credentials}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-16T06:32:08.061Z",
+  "generatedAt": "2026-11-16T18:56:46.152Z",
   "title": "Design System: Nathan Sta Monica",
   "extensions": {
     "colorMeta": {
@@ -366,7 +366,7 @@
       },
       "wordmark": {
         "displayName": "Wordmark",
-        "purpose": "The liquid-filled 'sta monica' h1 on the first screen; fills the width, runs off the bottom edge."
+        "purpose": "The liquid-filled 'sta monica' h1 on the first screen; fills the width. Runs off the bottom edge on laptops; whole, just above the bottom edge, on phones and tablets."
       },
       "display": {
         "displayName": "Display",
@@ -439,9 +439,14 @@
         "purpose": "Every eased transition: wordmark rise, reveals, chevrons, tile lift."
       },
       {
-        "name": "deck-spring",
-        "value": "stiffness 90, damping ratio 0.86 (about 0.5s)",
-        "purpose": "Moving between deck panels; the incoming panel blurs from 14px to sharp."
+        "name": "deck-scroll",
+        "value": "each panel rests 1/3 screen of scrolling, then the next slides over 1 screen, 1:1 with the wheel; follow rate 7/s; covered panel blur 0 to 12px by 60%, fade 40% to 70%; no snapping",
+        "purpose": "Scrolling the desktop deck, as on brandondavid.dev; it can rest halfway between panels."
+      },
+      {
+        "name": "deck-glide",
+        "value": "spring, stiffness 90, damping ratio 0.86 (about 0.5s)",
+        "purpose": "Keys, in-page links and the ⌘K menu moving a whole panel."
       },
       {
         "name": "wordmark-rise",
@@ -516,9 +521,9 @@
       "name": "Featured project card",
       "kind": "card",
       "refersTo": "feature-card",
-      "description": "The single dark object: the newest project.",
-      "html": "<article class=\"ds-card\"><div class=\"ds-card-head\"><h3 class=\"ds-card-name\">AI Personal Trainer</h3><span class=\"ds-card-badge\">Personal project</span></div><p class=\"ds-card-sum\">An AI coach that watches your form.</p><ul class=\"ds-card-stack\"><li>Next.js</li><li>TypeScript</li><li>Gemini 2.5 Flash</li></ul></article>",
-      "css": ".ds-card { max-width: 520px; padding: 28px; border-radius: 26px; background: #0b0e1d; color: rgb(255 255 255 / .9); font-family: Inter, system-ui, sans-serif; box-shadow: 0 36px 70px -40px rgb(11 14 29 / .65), 0 2px 6px rgb(11 14 29 / .12); } .ds-card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; } .ds-card-name { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.022em; color: #bba3ff; } .ds-card-badge { padding: 3px 10px; border: 1px solid rgb(255 255 255 / .22); border-radius: 99px; font-size: 12.5px; color: rgb(255 255 255 / .86); } .ds-card-sum { margin: 16px 0 0; font-size: 17px; line-height: 1.55; } .ds-card-stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; padding: 0; list-style: none; } .ds-card-stack li { padding: 3px 10px; border-radius: 99px; background: rgb(255 255 255 / .08); font-size: 12.5px; color: rgb(255 255 255 / .84); }"
+      "description": "The single dark object: the newest project. With a repo, the whole card links to it through the GitHub pill.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-head\"><h3 class=\"ds-card-name\">AI Personal Trainer</h3><span class=\"ds-card-badge\">Personal project</span><a class=\"ds-card-repo\" href=\"#\">GitHub <span aria-hidden=\"true\">↗</span></a></div><p class=\"ds-card-sum\">An AI coach that watches your form.</p><ul class=\"ds-card-stack\"><li>Next.js</li><li>TypeScript</li><li>Gemini 2.5 Flash</li></ul></article>",
+      "css": ".ds-card { position: relative; max-width: 520px; padding: 28px; border-radius: 26px; background: #0b0e1d; color: rgb(255 255 255 / .9); font-family: Inter, system-ui, sans-serif; box-shadow: 0 36px 70px -40px rgb(11 14 29 / .65), 0 2px 6px rgb(11 14 29 / .12); transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s cubic-bezier(.16,1,.3,1); } .ds-card:hover { transform: translateY(-4px); box-shadow: 0 46px 80px -40px rgb(11 14 29 / .72), 0 2px 6px rgb(11 14 29 / .12); } .ds-card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; } .ds-card-name { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.022em; color: #bba3ff; } .ds-card-badge { padding: 3px 10px; border: 1px solid rgb(255 255 255 / .22); border-radius: 99px; font-size: 12.5px; color: rgb(255 255 255 / .9); } .ds-card-repo { margin-left: auto; padding: 6px 11px 6px 10px; border-radius: 99px; background: #eeeee0; color: #0b0e1d; font-size: 13.5px; font-weight: 600; text-decoration: none; transition: background-color .2s; } .ds-card-repo::after { content: ''; position: absolute; inset: 0; border-radius: 26px; } .ds-card:hover .ds-card-repo { background: #e4e4d3; } .ds-card-sum { margin: 16px 0 0; font-size: 17px; line-height: 1.55; } .ds-card-stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; padding: 0; list-style: none; } .ds-card-stack li { padding: 3px 10px; border-radius: 99px; background: rgb(255 255 255 / .08); font-size: 12.5px; color: rgb(255 255 255 / .9); }"
     },
     {
       "name": "Tag",
@@ -542,7 +547,7 @@
       "refersTo": "tech-tile",
       "description": "App-icon squircle in a brand colour; logos are single-colour masks.",
       "html": "<span class=\"ds-tile\"><svg viewBox=\"0 0 24 24\" width=\"52%\" height=\"52%\" fill=\"#fff\"><path d=\"M12 2 2 7v10l10 5 10-5V7z\"/></svg></span>",
-      "css": ".ds-tile { display: inline-grid; place-items: center; width: 96px; height: 96px; border-radius: 26%; background: #2496ed; box-shadow: inset 0 0 0 1px rgb(17 17 16 / .07), 0 14px 26px -18px rgb(17 17 16 / .5); transition: transform .45s cubic-bezier(.16,1,.3,1); } .ds-tile:hover { transform: translateY(-4px) scale(1.04); }"
+      "css": ".ds-tile { display: inline-grid; place-items: center; width: 128px; height: 128px; border-radius: 26%; background: #2496ed; box-shadow: inset 0 0 0 1px rgb(17 17 16 / .07), 0 14px 26px -18px rgb(17 17 16 / .5); transition: transform .45s cubic-bezier(.16,1,.3,1); } .ds-tile:hover { transform: translateY(-4px) scale(1.04); }"
     },
     {
       "name": "Photo print",
@@ -563,13 +568,13 @@
   ],
   "narrative": {
     "northStar": "The Liquid Signature",
-    "overview": "Warm paper, black ink, and one living signature. The site is a deck of full-screen panels, each holding one idea: who Nathan is, where he has worked, what he has built, what he builds with, who he is outside work, and how to reach him. It is quiet on purpose, with wide margins, a single centred heading per panel and plenty of empty paper, so the two moments of colour carry the weight. The look follows brandondavid.dev, which Nathan chose as the reference, filled with his own, richer content.\n\nThe signature is the giant lowercase \"sta monica\" set in DM Serif Display along the bottom of the first screen. Its letters are filled with a WebGL liquid of navy, cobalt and violet with iridescent rims, which leans toward the pointer. Everything else stays typographic: Inter on paper, underlined ink links, hairline rows, small coloured dots for each employer. The only dark surface is the featured project card.\n\nOn laptops and desktops the panels behave like a deck. The wheel, the keys or a swipe move one panel at a time on a spring; the next panel slides up over the current one and sharpens from a blur while the one beneath fades. On phones and tablets the same panels scroll normally and sharpen as they enter. Without JavaScript the page is a plain, complete scroll with ink letters.",
+    "overview": "Warm paper, black ink, and one living signature. The site is a deck of full-screen panels, each holding one idea: who Nathan is, where he has worked, what he has built, what he builds with, who he is outside work, and how to reach him. It is quiet on purpose, with wide margins, a single centred heading per panel and plenty of empty paper, so the two moments of colour carry the weight. The look follows brandondavid.dev, which Nathan chose as the reference, filled with his own, richer content.\n\nThe signature is the giant lowercase \"sta monica\" set in DM Serif Display along the bottom of the first screen. Its letters are filled with a WebGL liquid of navy, cobalt and violet with iridescent rims, which leans toward the pointer. Everything else stays typographic: Inter on paper, underlined ink links, hairline rows, small coloured dots for each employer. The only dark surface is the featured project card.\n\nOn laptops and desktops the panels behave like a deck that scrolls the way brandondavid.dev does. Each panel rests for a third of a screen of scrolling, then the next one slides up over it, following the wheel or trackpad one to one, while the one beneath blurs and fades away behind it. The deck stops wherever the scrolling stops, even halfway, with both panels in view. The keys, in-page links and the ⌘K menu glide a whole panel on a spring. On phones and tablets the same panels scroll normally and sharpen as they enter. Without JavaScript the page is a plain, complete scroll with ink letters.",
     "keyCharacteristics": [
       "Warm paper ground (#eeeee0) and near-black ink; no white surfaces.",
       "One serif voice (DM Serif Display) for the wordmark and the closing line; Inter for everything else.",
       "Colour lives in two places only: the liquid inside the wordmark and the saturated brand tiles of the tech marquee.",
       "One idea per full-screen panel, headed by a casual sentence that ends in an ellipsis.",
-      "Motion is structural: the wordmark rises, panels slide and sharpen, tiles slide; nothing decorative."
+      "Motion is structural: the wordmark rises, panels slide over one another as you scroll while the covered one blurs away, tiles slide; nothing decorative."
     ],
     "rules": [
       {
@@ -610,6 +615,7 @@
       "Do make anything new keyboard-reachable inside its panel; the deck follows focus.",
       "Do keep numbers understated: bold weight inside running text, never big stat blocks.",
       "Do give anything that must survive without JavaScript a native element (details/summary, plain links).",
+      "Do put hover-only effects inside `@media (hover: hover)`: on an iPhone a tap would leave them stuck on (a faded email, a grey row, a paused marquee).",
       "Do keep photography personal and singular: one real photo print in About, never stock imagery or decorative pictures."
     ],
     "donts": [

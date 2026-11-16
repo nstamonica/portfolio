@@ -119,8 +119,12 @@
   text-decoration-color: currentColor;
   transition: text-decoration-thickness 0.2s ease;
 }
-.link:hover {
-  text-decoration-thickness: 2px;
+/* Hover styles only where something can hover: on phones a tap would leave
+   them stuck on (iOS keeps :hover after a tap). */
+@media (hover: hover) {
+  .link:hover {
+    text-decoration-thickness: 2px;
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -145,8 +149,9 @@
   padding: clamp(56px, 10vw, 120px) var(--gutter);
 }
 
+/* The tech marquee runs the full width of the screen, inside the gutters. */
 .panel-body--wide {
-  max-width: 1360px;
+  max-width: none;
 }
 
 .panel-title {
@@ -183,7 +188,7 @@
     flex-direction: column;
     justify-content: center;
     overflow: clip;
-    will-change: transform, opacity;
+    will-change: transform, opacity, filter;
   }
 
   /* Until the deck script places them, later panels wait below the screen. */
@@ -200,6 +205,15 @@
 
   html.deck-on .panel-title {
     flex: none;
+  }
+}
+
+/* The panels are see-through, so the one underneath stays in view, blurring
+   and fading, while the next slides over it (as on brandondavid.dev). With
+   reduced motion they stay opaque and nothing blurs. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  html.deck-on .panel {
+    background: none;
   }
 }
 
@@ -241,9 +255,16 @@
 .intro-copy {
   grid-row: 2;
   justify-self: end;
-  max-width: 62rem;
   padding-inline: var(--gutter);
   text-align: right;
+}
+
+/* Wide screens break the line where content.ts splits it, so it reads as two
+   lines like brandondavid.dev's; narrower screens wrap it as one sentence. */
+@media (min-width: 960px) {
+  .intro-part {
+    display: block;
+  }
 }
 
 .intro-line {
@@ -276,7 +297,8 @@
 }
 
 .wordmark-text {
-  /* Fills the width; the bottom of the letters runs off the edge of the screen. */
+  /* Fills the width. On laptops and desktops the bottom of the letters runs
+     off the edge of the screen; phones and tablets show them whole (below). */
   margin-bottom: -0.1em;
   padding-top: 0.04em;
   font-family: var(--font-serif);
@@ -289,9 +311,10 @@
   color: var(--color-ink);
 }
 
-/* Phones and portrait tablets: "sta" over "monica", so the liquid letters
-   fill the bottom of the screen. */
-@media (max-width: 767px), (max-width: 1023px) and (orientation: portrait) {
+/* Phones and tablets held upright: "sta" over "monica", so the liquid letters
+   fill the bottom of the screen. Turned sideways, a phone gets the one-line
+   wordmark, so the whole word still fits on its short screen. */
+@media (max-width: 1023px) and (orientation: portrait) {
   .wordmark {
     /* Width of the longest word, "monica" (3.21em), plus a hair of margin. */
     --wordmark-word-em: 3.24;
@@ -305,6 +328,15 @@
   }
   .wordmark-word {
     display: block;
+  }
+}
+
+/* Phones and tablets show the whole word: the letters end a small margin
+   above the bottom edge instead of being cut off by it. */
+@media (max-width: 1023px) and (orientation: portrait), (hover: none) {
+  .wordmark-text {
+    margin-bottom: 0;
+    padding-bottom: var(--wordmark-pad);
   }
 }
 
@@ -386,8 +418,10 @@
 .role-summary::-webkit-details-marker {
   display: none;
 }
-.role-summary:hover {
-  background: var(--color-paper-2);
+@media (hover: hover) {
+  .role-summary:hover {
+    background: var(--color-paper-2);
+  }
 }
 
 .role-period {
@@ -586,6 +620,9 @@
 }
 
 .feature-card {
+  position: relative;
+  /* Keeps the card-wide link's z-index local to the card. */
+  isolation: isolate;
   width: 100%;
   max-width: 640px;
   padding: clamp(22px, 2.3vw, 32px);
@@ -595,6 +632,65 @@
   box-shadow:
     0 36px 70px -40px rgb(11 14 29 / 0.65),
     0 2px 6px rgb(11 14 29 / 0.12);
+  transition:
+    transform 0.5s var(--ease-out-expo),
+    box-shadow 0.5s var(--ease-out-expo);
+}
+
+/* With a repo, the whole card is the link: the GitHub pill's hit area
+   stretches over it, so a click anywhere on the card opens the code. */
+.feature-repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 6px 11px 6px 10px;
+  border-radius: 99px;
+  background: var(--color-paper);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-night);
+  transition: background-color 0.2s ease;
+}
+.feature-repo::after {
+  content: "";
+  position: absolute;
+  /* Above the bullets, which are positioned for their dots. */
+  z-index: 1;
+  inset: 0;
+  border-radius: 26px;
+}
+.feature-repo:focus-visible {
+  outline: none;
+}
+.feature-card:has(.feature-repo:focus-visible) {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+}
+.feature-repo-arrow {
+  transition: transform 0.4s var(--ease-out-expo);
+}
+@media (hover: hover) {
+  .feature-card:has(.feature-repo):hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 46px 80px -40px rgb(11 14 29 / 0.72),
+      0 2px 6px rgb(11 14 29 / 0.12);
+  }
+  .feature-card:hover .feature-repo {
+    background: var(--color-paper-2);
+  }
+  .feature-card:hover .feature-repo-arrow {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card:has(.feature-repo):hover,
+  .feature-card:hover .feature-repo-arrow {
+    transform: none;
+  }
 }
 
 .feature-head {
@@ -689,6 +785,9 @@
 }
 
 .feature-links {
+  /* Above the card-wide repo link, so these stay clickable. */
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -706,8 +805,10 @@
   color: var(--color-night);
   transition: background-color 0.2s ease;
 }
-.feature-links a:hover {
-  background: var(--color-paper-2);
+@media (hover: hover) {
+  .feature-links a:hover {
+    background: var(--color-paper-2);
+  }
 }
 
 .project-list {
@@ -742,8 +843,10 @@
 .project-item-summary::-webkit-details-marker {
   display: none;
 }
-.project-item-summary:hover {
-  background: var(--color-paper-2);
+@media (hover: hover) {
+  .project-item-summary:hover {
+    background: var(--color-paper-2);
+  }
 }
 
 .project-item-head {
@@ -804,10 +907,12 @@
 /* ------------------------------------------------------------------ */
 
 .marquee {
-  --tile-size: clamp(64px, min(8.6vw, 12.6vh), 124px);
+  /* About brandondavid.dev's size (9vw) and a touch over, capped by the
+     screen's height so the three rows always fit their panel. */
+  --tile-size: clamp(68px, min(9.4vw, 18.5vh), 168px);
   --tile-gap: calc(var(--tile-size) * 0.24);
   display: grid;
-  gap: var(--tile-gap);
+  gap: calc(var(--tile-size) * 0.3);
   width: 100%;
   /* Only the alpha matters in a mask; ink is simply an opaque stop. */
   -webkit-mask-image: linear-gradient(90deg, transparent, var(--color-ink) 9%, var(--color-ink) 91%, transparent);
@@ -829,12 +934,15 @@
 .marquee-row[data-reverse] .marquee-track {
   animation-direction: reverse;
 }
-.marquee-row:hover .marquee-track {
-  animation-play-state: paused;
+@media (hover: hover) {
+  .marquee-row:hover .marquee-track {
+    animation-play-state: paused;
+  }
 }
 
+/* The tiles keep sliding while any of their panel is on screen, even halfway. */
 @media screen {
-  html.deck-on .panel:not(.is-active) .marquee-track {
+  html.deck-on .panel[data-visible="false"] .marquee-track {
     animation-play-state: paused;
   }
 }
@@ -860,8 +968,10 @@
     0 14px 26px -18px rgb(17 17 16 / 0.5);
   transition: transform 0.45s var(--ease-out-expo);
 }
-.tile:hover {
-  transform: translateY(-4px) scale(1.04);
+@media (hover: hover) {
+  .tile:hover {
+    transform: translateY(-4px) scale(1.04);
+  }
 }
 
 .tile-logo {
@@ -877,7 +987,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .marquee {
-    --tile-size: clamp(52px, min(5.6vw, 8.6vh), 84px);
+    --tile-size: clamp(56px, min(6.4vw, 9.6vh), 96px);
     -webkit-mask-image: none;
     mask-image: none;
   }
@@ -914,8 +1024,10 @@
   transform: rotate(-2deg);
   transition: transform 0.6s var(--ease-out-expo);
 }
-.about-photo:hover {
-  transform: rotate(0deg) translateY(-4px);
+@media (hover: hover) {
+  .about-photo:hover {
+    transform: rotate(0deg) translateY(-4px);
+  }
 }
 
 /* The photo arrives blurred and a click reveals it (see components/photo-print.tsx).
@@ -1066,8 +1178,10 @@
   cursor: pointer;
   transition: opacity 0.2s ease;
 }
-.contact-email:hover {
-  opacity: 0.6;
+@media (hover: hover) {
+  .contact-email:hover {
+    opacity: 0.6;
+  }
 }
 
 .copy-note {
@@ -1085,6 +1199,22 @@
   font-size: clamp(19px, 1.5vw, 22px);
   line-height: 1.2;
   letter-spacing: -0.03em;
+}
+
+/* Touch screens: thumb-sized targets (Apple asks for 44pt). The stacked links
+   space out to about 43px each; the email's tap area grows without moving it. */
+@media (pointer: coarse) {
+  .contact-links {
+    gap: 0;
+  }
+  .contact-links a {
+    display: inline-block;
+    padding-block: 10px;
+  }
+  .contact-email {
+    padding-block: 10px;
+    margin-block: -8px -10px;
+  }
 }
 
 .contact-foot {

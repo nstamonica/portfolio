@@ -30,7 +30,14 @@ export const site = {
 
 /** The first screen, above the wordmark. */
 export const intro = {
-  line: "I’m an undergraduate student passionate about software engineering, product management and building things that hold up.",
+  /**
+   * One sentence, split where it should break: laptops and desktops show it
+   * as these two lines, and phones and tablets wrap it as one sentence.
+   */
+  lines: [
+    "I’m an undergraduate student passionate about software engineering,",
+    "product management and building things that hold up.",
+  ],
   /** Used only by the link-preview image (app/opengraph-image.tsx); the first screen shows just the line. */
   credentials:
     "Computer Science & Cybersecurity at Carleton University. Previously at the RCMP, Shared Services Canada, Correctional Service Canada and the Canada Revenue Agency.",
@@ -159,6 +166,9 @@ export type Project = {
   stack: string[];
   theme: Theme;
   glyph: Glyph;
+  /** The GitHub repository. The big card becomes a link to it; in the list it shows as a link. */
+  repo?: string;
+  /** Any other links (a live demo, a write-up), shown as buttons. */
   links?: { label: string; href: string }[];
 };
 
@@ -186,8 +196,9 @@ export const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "Gemini 2.5 Flash", "Google AI File Manager", "Tailwind CSS", "Node.js"],
     theme: "violet",
     glyph: "sparkle",
-    // Add a repo or live demo and it shows up as a button:
-    // links: [{ label: "View on GitHub", href: "https://github.com/nstamonica/..." }],
+    repo: "https://github.com/nstamonica/ai-gym-coach",
+    // Add a live demo and it shows up as a button:
+    // links: [{ label: "Live demo", href: "https://..." }],
   },
 ];
 

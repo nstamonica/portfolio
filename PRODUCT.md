@@ -43,8 +43,11 @@ Since November 2026 Nathan also wants his interest in **product management** vis
 - Visual constraints Nathan set (November 2026 redesign, replacing the earlier Apple bento):
   - The look of brandondavid.dev: warm paper, black ink, a giant DM Serif Display wordmark, Inter for text, and sliding rows of colourful app-icon tech tiles.
   - The giant wordmark reads "sta monica". The moving liquid (WebGL) lives only inside its letters.
-  - Full-screen snap panels on laptops and desktops; ordinary scrolling on phones.
-  - Brandon's touches he asked for: the wordmark rises in, a cursor pill follows the mouse, panels sharpen from a blur.
+  - Full-screen panels on laptops and desktops that scroll like Brandon's: long, one-to-one with the wheel, and able to rest halfway between two panels. Ordinary scrolling on phones.
+  - Brandon's touches he asked for: the wordmark rises in, a cursor pill follows the mouse, and the covered panel blurs and fades as the next one slides over it.
+  - The intro reads as two lines on laptops, like Brandon's.
+  - On phones the whole "sta monica" wordmark is visible, letters not cut off; on laptops it runs off the bottom edge as before.
+  - The featured project card links to its GitHub repo.
   - The content stays his own and richer than the reference: four roles, projects, tech, about.
   - Numbers should be understated, not flashy.
 

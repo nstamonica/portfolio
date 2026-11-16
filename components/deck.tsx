@@ -4,12 +4,14 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { DECK_QUERY, DECK_VISIBILITY_EVENT, registerDeck, revealTarget } from "@/lib/deck";
 
 /*
- * The page deck. On laptops and desktops every panel fills the screen and the
- * wheel, keyboard or a swipe moves one panel at a time: the next panel slides
- * up over the current one on a spring while its content sharpens from a blur,
- * and the one underneath fades away. On phones, tablets and without
- * JavaScript the same panels simply scroll, sharpening into view as they
- * arrive.
+ * The page deck. On laptops and desktops every panel fills the screen and
+ * scrolling moves along one long track, as on brandondavid.dev: each panel
+ * rests for a third of a screen of scrolling, then the next one slides up over
+ * it, following the wheel or trackpad one to one, while the one underneath
+ * blurs and fades away. Stop scrolling and the deck stops with you, even
+ * halfway. The keys, in-page links and the ⌘K menu glide a whole panel at a
+ * time. On phones, tablets and without JavaScript the same panels simply
+ * scroll, sharpening into view as they arrive.
  *
  * Every panel stays in the DOM, so screen readers and Tab reach all of it;
  * focusing something in another panel brings that panel up.
@@ -51,6 +53,22 @@ export function Deck({ children }: { children: ReactNode }) {
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
+/* ---------- The feel of the deck ---------- */
+
+/** How long each panel rests before the next one moves, as a share of the screen's height of scrolling. */
+const HOLD = 1 / 3;
+/** How quickly the deck catches up with the wheel, per second. Lower feels floatier. */
+const FOLLOW = 7;
+/** The covered panel blurs up to this many px, reached when the next panel is this far up… */
+const BLUR_MAX = 12;
+const BLUR_FULL_AT = 0.6;
+/** …and fades out between these two points. Together they match brandondavid.dev. */
+const FADE_FROM = 0.4;
+const FADE_TO = 0.7;
+/** The glide for keys, links and the ⌘K menu: it settles in about half a second with a hint of give. */
+const STIFFNESS = 90;
+const DAMPING = 2 * Math.sqrt(STIFFNESS) * 0.86;
+
 /** The nearest scrollable region inside a panel that can still move in `dir`. */
 function scrollableIn(start: EventTarget | null, dir: number) {
   let node = start instanceof Element ? start : null;
@@ -81,18 +99,63 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
 
   html.classList.add("deck-on");
 
-  let height = window.innerHeight;
-  let index = 0; // the panel the deck is heading to
-  let pos = 0; // where the deck is drawn, in panels (animated)
-  let vel = 0;
-  let nudge = 0; // a small pull toward the next panel before a gesture commits
+  /* ---------- The track ----------
+   * The deck is drawn at `pos`, counted in panels: 2.5 is halfway from the
+   * third panel to the fourth. The wheel and touch move `scroll`, a point on
+   * an imaginary track where each panel holds still for `hold` px of
+   * scrolling and the next one then slides up over a screen's height of it. */
+
+  let height = 0;
+  let hold = 0;
+  let span = 0; // one panel's share of the track: its rest, then the slide to the next
+  let maxScroll = 0;
+  const measure = () => {
+    height = window.innerHeight;
+    hold = Math.round(height * HOLD);
+    span = hold + height;
+    maxScroll = last * span;
+  };
+  measure();
+
+  /** The deck position for a point on the track. A panel rests across the middle of its hold. */
+  const posAt = (s: number) => {
+    const u = clamp(s, 0, maxScroll) + hold / 2;
+    const k = Math.floor(u / span);
+    const into = u - k * span - hold;
+    return Math.min(last, into <= 0 ? k : k + into / height);
+  };
+
+  /** The point on the track for a deck position; a whole panel sits mid-rest. */
+  const scrollAt = (p: number) => {
+    const k = Math.floor(p + 1e-6);
+    const f = p - k;
+    return f < 1e-4 ? k * span : k * span + hold / 2 + f * height;
+  };
+
+  let scroll = 0; // where the wheel has taken the track
+  let pos = 0; // where the deck is drawn
+  let vel = 0; // in panels per second
+  let goal: number | null = null; // the panel a key, link or focus is gliding to
+  let active = -1;
   let raf = 0;
   let lastTime = 0;
   const visible = panels.map(() => false);
 
-  // Spring tuned to settle in about half a second with a hint of give.
-  const STIFFNESS = 90;
-  const DAMPING = 2 * Math.sqrt(STIFFNESS) * 0.86;
+  /** The panel in charge: it holds the URL, the "is-active" class and keyboard focus. */
+  const setActive = (i: number, moveFocus: boolean) => {
+    if (i === active) return;
+    const first = active < 0;
+    active = i;
+    panels.forEach((panel, n) => panel.classList.toggle("is-active", n === i));
+    if (first) return;
+    const hash = i === 0 ? "" : `#${panels[i].id}`;
+    window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${hash}`);
+    // Keep keyboard focus with what's on screen, so Tab continues from here.
+    const focused = document.activeElement;
+    if (moveFocus && !(focused instanceof Node && panels[i].contains(focused))) {
+      panels[i].focus({ preventScroll: true });
+    }
+  };
 
   const render = () => {
     for (let i = 0; i <= last; i++) {
@@ -102,19 +165,24 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
       let opacity = 1;
       let blur = 0;
       if (d > 0) {
-        // Waiting below, or sliding up over the current panel.
+        // Waiting below, or sliding up over the panel in front of it.
         y = Math.min(d, 1.04) * height;
-        blur = Math.min(d, 1) * 14;
       } else if (d < 0) {
-        // Covered by the next panel: fade out underneath it.
-        opacity = clamp(1 + d * 1.6, 0, 1);
+        const t = -d;
+        if (reduced) {
+          // Plain opaque panels: the next one simply covers it.
+          opacity = t < 1 ? 1 : 0;
+        } else {
+          // Covered: it blurs and fades beneath the see-through panel sliding over it.
+          opacity = clamp((FADE_TO - t) / (FADE_TO - FADE_FROM), 0, 1);
+          blur = opacity > 0 ? Math.min(t / BLUR_FULL_AT, 1) * BLUR_MAX : 0;
+        }
       }
       panel.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
       panel.style.opacity = opacity.toFixed(3);
-      const inner = inners[i];
-      if (inner) inner.style.filter = !reduced && blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : "";
+      panel.style.filter = blur > 0.05 ? `blur(${blur.toFixed(2)}px)` : "";
 
-      const isVisible = d > -0.625 && d < 1;
+      const isVisible = d < 1 && opacity > 0;
       if (isVisible !== visible[i]) {
         visible[i] = isVisible;
         panel.dataset.visible = String(isVisible);
@@ -123,34 +191,48 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
         );
       }
     }
+    setActive(goal ?? Math.round(pos), true);
   };
 
   const tick = (now: number) => {
     const dt = lastTime ? Math.min((now - lastTime) / 1000, 1 / 30) : 1 / 60;
     lastTime = now;
-    const goal = index + nudge;
-    // Two sub-steps keep the spring stable on slow frames.
-    for (let step = 0; step < 2; step++) {
-      const h = dt / 2;
-      const accel = STIFFNESS * (goal - pos) - DAMPING * vel;
-      vel += accel * h;
-      pos += vel * h;
-    }
-    if (Math.abs(goal - pos) < 0.0005 && Math.abs(vel) < 0.003) {
-      pos = goal;
-      vel = 0;
-      render();
-      raf = 0;
-      lastTime = 0;
-      return;
+    let done: boolean;
+    if (goal === null) {
+      // Follow the wheel: ease toward the point on the track, never past it.
+      const want = posAt(scroll);
+      const before = pos;
+      pos += (want - pos) * (1 - Math.exp(-FOLLOW * dt));
+      vel = (pos - before) / dt;
+      done = Math.abs(want - pos) < 0.0004;
+      if (done) pos = want;
+    } else {
+      // Glide to a whole panel on a spring. Two sub-steps keep it stable on slow frames.
+      for (let step = 0; step < 2; step++) {
+        const h = dt / 2;
+        vel += (STIFFNESS * (goal - pos) - DAMPING * vel) * h;
+        pos += vel * h;
+      }
+      done = Math.abs(goal - pos) < 0.0005 && Math.abs(vel) < 0.003;
+      if (done) {
+        pos = goal;
+        goal = null;
+      }
     }
     render();
-    raf = requestAnimationFrame(tick);
+    if (done) {
+      vel = 0;
+      raf = 0;
+      lastTime = 0;
+    } else {
+      raf = requestAnimationFrame(tick);
+    }
   };
 
   const kick = () => {
     if (reduced) {
-      pos = index + nudge;
+      pos = goal ?? posAt(scroll);
+      goal = null;
       vel = 0;
       render();
       return;
@@ -161,24 +243,15 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
     }
   };
 
-  const setActive = (i: number) => {
-    panels.forEach((panel, n) => panel.classList.toggle("is-active", n === i));
-  };
-
+  /** Glide to a whole panel (keys, links, focus, the ⌘K menu). */
   const goTo = (target: number, { moveFocus = true } = {}) => {
     const next = clamp(target, 0, last);
-    if (next !== index) {
-      index = next;
-      setActive(next);
-      const hash = next === 0 ? "" : `#${panels[next].id}`;
-      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${hash}`);
-      // Keep keyboard focus with what's on screen, so Tab continues from here.
-      const active = document.activeElement;
-      if (moveFocus && !(active instanceof Node && panels[next].contains(active))) {
-        panels[next].focus({ preventScroll: true });
-      }
-      if (reduced) inners[next]?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: "ease-out" });
+    if (reduced && next !== active) {
+      inners[next]?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: "ease-out" });
     }
+    goal = next;
+    scroll = scrollAt(next);
+    setActive(next, moveFocus);
     kick();
   };
 
@@ -193,75 +266,43 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
     return true;
   };
 
+  /** Move along the track (wheel, trackpad, touch). */
+  const scrollBy = (delta: number) => {
+    if (goal !== null) {
+      // Take over a glide from wherever the deck is drawn right now.
+      scroll = scrollAt(pos);
+      goal = null;
+    }
+    scroll = clamp(scroll + delta, 0, maxScroll);
+    kick();
+  };
+
+  /** Resting on a panel, rather than partway to the next. */
+  const resting = () => goal === null && Number.isInteger(posAt(scroll));
+
   // Start on the panel the URL points at, without animating.
   const initial = idFromHash(window.location.hash);
   const startEl = initial ? document.getElementById(initial) : null;
   const startPanel = startEl?.closest<HTMLElement>(".panel");
-  if (startPanel && panels.includes(startPanel)) {
-    index = panels.indexOf(startPanel);
-    pos = index;
-    revealTarget(startEl);
-  }
-  setActive(index);
+  const start = startPanel ? Math.max(0, panels.indexOf(startPanel)) : 0;
+  if (start > 0) revealTarget(startEl);
+  pos = start;
+  scroll = scrollAt(start);
+  setActive(start, false);
   render();
 
   /* ---------- Wheel and trackpad ---------- */
 
-  const COMMIT = 40; // px of scrolling that moves one panel
-  let accum = 0;
-  let locked = false; // one panel per gesture
-  let lockedAt = 0;
-  let minAbs = Infinity;
-  let gestureTimer = 0;
-
-  const endGesture = () => {
-    accum = 0;
-    locked = false;
-    minAbs = Infinity;
-    if (nudge) {
-      nudge = 0;
-      kick();
-    }
-  };
-
   const onWheel = (event: WheelEvent) => {
     if (event.ctrlKey || event.defaultPrevented) return; // pinch-zoom, or already handled
-    const scale = event.deltaMode === 1 ? 20 : event.deltaMode === 2 ? height : 1;
+    const scale = event.deltaMode === 1 ? 33 : event.deltaMode === 2 ? height : 1;
     const dy = event.deltaY * scale;
     if (Math.abs(event.deltaX * scale) > Math.abs(dy)) return; // sideways swipes
     if (event.target instanceof Element && event.target.closest("[role='dialog']")) return;
-    if (scrollableIn(event.target, dy)) return; // let an inner list scroll first
-
+    // Resting on a panel, a list inside it scrolls before the deck moves.
+    if (resting() && scrollableIn(event.target, dy)) return;
     event.preventDefault();
-    const now = performance.now();
-    const abs = Math.abs(dy);
-    window.clearTimeout(gestureTimer);
-    gestureTimer = window.setTimeout(endGesture, 180);
-
-    // Inside a trackpad's inertia tail the deltas only shrink; a clear new
-    // push (much bigger than the smallest recent delta) starts a new gesture.
-    if (locked && now - lockedAt > 260 && abs > Math.max(minAbs * 2.5, 24)) {
-      locked = false;
-      accum = 0;
-    }
-    minAbs = Math.min(minAbs, abs);
-    if (locked) return;
-
-    accum += dy;
-    const dir = Math.sign(accum);
-    const atEdge = (dir > 0 && index === last) || (dir < 0 && index === 0);
-    if (Math.abs(accum) >= COMMIT && !atEdge) {
-      locked = true;
-      lockedAt = now;
-      minAbs = abs;
-      accum = 0;
-      nudge = 0;
-      goTo(index + dir);
-      return;
-    }
-    // Follow the gesture a little before it commits (a gentle rubber band at the ends).
-    nudge = clamp(accum / height, -1, 1) * (atEdge ? 0.12 : 0.3);
-    kick();
+    scrollBy(dy);
   };
 
   /* ---------- Keyboard ---------- */
@@ -296,40 +337,53 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
       default:
         return;
     }
-    if ((event.key === "ArrowDown" || event.key === "ArrowUp") && scrollableIn(target, dir)) return;
+    if ((event.key === "ArrowDown" || event.key === "ArrowUp") && resting() && scrollableIn(target, dir)) return;
     event.preventDefault();
-    // Holding a key moves on once the current move is mostly done.
-    if (event.repeat && Math.abs(pos - index) > 0.35) return;
-    goTo(index + dir);
+    // Holding a key moves on once the current glide is mostly done.
+    if (event.repeat && goal !== null && Math.abs(pos - goal) > 0.35) return;
+    // From partway between two panels, a key finishes the move in its direction.
+    const from = goal ?? pos;
+    goTo(dir > 0 ? Math.floor(from + 0.001) + 1 : Math.ceil(from - 0.001) - 1);
   };
 
   /* ---------- Touch (touchscreen laptops) ---------- */
 
-  let touchStartY = 0;
+  let touchY = 0;
+  let touchTime = 0;
+  let touchVel = 0; // px per ms
+  let touchDecided = false;
   let touchPassThrough = false;
 
   const onTouchStart = (event: TouchEvent) => {
-    touchStartY = event.touches[0]?.clientY ?? 0;
+    touchY = event.touches[0]?.clientY ?? 0;
+    touchTime = performance.now();
+    touchVel = 0;
+    touchDecided = false;
     touchPassThrough = false;
   };
 
   const onTouchMove = (event: TouchEvent) => {
     if (event.target instanceof Element && event.target.closest("[role='dialog']")) return;
-    const dy = touchStartY - (event.touches[0]?.clientY ?? touchStartY);
-    if (touchPassThrough || scrollableIn(event.target, dy)) {
-      touchPassThrough = true;
-      return;
+    const y = event.touches[0]?.clientY ?? touchY;
+    const dy = touchY - y;
+    if (!touchDecided) {
+      touchDecided = true;
+      touchPassThrough = resting() && Boolean(scrollableIn(event.target, dy));
     }
+    if (touchPassThrough) return;
     event.preventDefault();
-    nudge = clamp(dy / height, -0.3, 0.3);
-    kick();
+    const now = performance.now();
+    if (now > touchTime) touchVel = 0.7 * (dy / (now - touchTime)) + 0.3 * touchVel;
+    touchY = y;
+    touchTime = now;
+    scrollBy(dy);
   };
 
-  const onTouchEnd = (event: TouchEvent) => {
-    const dy = touchStartY - (event.changedTouches[0]?.clientY ?? touchStartY);
-    nudge = 0;
-    if (!touchPassThrough && Math.abs(dy) > 50) goTo(index + Math.sign(dy));
-    else kick();
+  const onTouchEnd = () => {
+    // A flick carries on a little, like a native scroll.
+    if (touchDecided && !touchPassThrough && performance.now() - touchTime < 100) {
+      scrollBy(clamp(touchVel * 280, -height, height));
+    }
   };
 
   /* ---------- Links, focus, history, resize ---------- */
@@ -343,10 +397,13 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
     if (goToId(idFromHash(link.getAttribute("href") ?? ""))) event.preventDefault();
   };
 
+  // Tabbing (or clicking) into a panel that isn't fully on screen brings it up.
+  // Panels themselves only take focus from the deck, so those are ignored.
   const onFocusIn = (event: FocusEvent) => {
     const panel = event.target instanceof Element ? event.target.closest<HTMLElement>(".panel") : null;
-    const i = panel ? panels.indexOf(panel) : -1;
-    if (i >= 0 && i !== index) goTo(i, { moveFocus: false });
+    if (!panel || event.target === panel) return;
+    const i = panels.indexOf(panel);
+    if (i >= 0 && (i !== active || !resting())) goTo(i, { moveFocus: false });
   };
 
   const onHashChange = () => {
@@ -354,7 +411,9 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
   };
 
   const onResize = () => {
-    height = window.innerHeight;
+    const p = goal ?? posAt(scroll);
+    measure();
+    scroll = scrollAt(p);
     render();
   };
 
@@ -381,7 +440,6 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
     root.removeEventListener("scroll", onRootScroll);
     unregister();
     cancelAnimationFrame(raf);
-    window.clearTimeout(gestureTimer);
     window.removeEventListener("wheel", onWheel);
     window.removeEventListener("keydown", onKeyDown);
     window.removeEventListener("touchstart", onTouchStart);
@@ -392,16 +450,17 @@ function enableDeck(root: HTMLElement, reduced: boolean) {
     document.removeEventListener("click", onClick);
     document.removeEventListener("focusin", onFocusIn);
     html.classList.remove("deck-on");
-    panels.forEach((panel, i) => {
+    panels.forEach((panel) => {
       panel.style.transform = "";
       panel.style.opacity = "";
+      panel.style.filter = "";
       panel.classList.remove("is-active");
       delete panel.dataset.visible;
-      if (inners[i]) inners[i].style.filter = "";
       window.dispatchEvent(new CustomEvent(DECK_VISIBILITY_EVENT, { detail: { id: panel.id, visible: true } }));
     });
     // Leave the normal page scrolled to where the deck was.
-    if (index > 0) panels[index].scrollIntoView({ block: "start" });
+    const at = Math.round(pos);
+    if (at > 0) panels[at].scrollIntoView({ block: "start" });
   };
 }
 
